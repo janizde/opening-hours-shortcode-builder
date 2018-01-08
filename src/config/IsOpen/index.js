@@ -1,8 +1,9 @@
+import React from 'react';
 import { FIELD_TYPES, SHORTCODE_TYPES } from "../constants";
 
 export default {
-  type: SHORTCODE_TYPES.IS_OPEN,
-  name: 'Is Open',
+  id: SHORTCODE_TYPES.IS_OPEN,
+  label: 'Is Open',
   fields: [
     {
       id: 'before_widget',
@@ -23,10 +24,10 @@ export default {
       label: 'Before title',
       description: 'HTML markup before title',
       type: FIELD_TYPES.TEXT,
-      default: '<div class="op-is-open-shortcode">',
+      default: <code>{'<div class="op-is-open-shortcode">'}</code>,
     },
     {
-      id: 'after_widget',
+      id: 'after_title',
       label: 'After title',
       description: 'HTML markup after title',
       type: FIELD_TYPES.TEXT,
@@ -63,5 +64,5 @@ export default {
       type: FIELD_TYPES.CHECKBOX,
       default: false,
     },
-  ]
+  ],
 };
