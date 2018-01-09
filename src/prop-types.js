@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import { FIELD_TYPES } from "./config/constants";
+import { FIELD_TYPES } from './config/constants';
 
-const placeholders = PropTypes.arrayOf(PropTypes.shape({
-  key: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-}));
+const placeholders = PropTypes.arrayOf(
+  PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  })
+);
 
 const fieldConfig = PropTypes.shape({
   id: PropTypes.string.isRequired,
