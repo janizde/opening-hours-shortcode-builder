@@ -10,6 +10,7 @@ import ShortcodeDisplay from './ShortcodeDisplay';
 import Text from './../Fields/Text';
 import Checkbox from './../Fields/Checkbox';
 import Select from './../Fields/Select';
+import SetId from './../Fields/SetId';
 
 const createEmptyModel = fields =>
   fields.map(field => field.id).reduce(
@@ -20,6 +21,8 @@ const createEmptyModel = fields =>
     {}
   );
 
+const options = parseOptions();
+
 export default class Form extends PureComponent {
   constructor(props) {
     super(props);
@@ -28,8 +31,6 @@ export default class Form extends PureComponent {
       shortcode: SHORTCODE_TYPES.IS_OPEN,
       model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields),
     };
-
-    console.log(parseOptions());
 
     this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
     this.handleChangeModelValue = this.handleChangeModelValue.bind(this);
@@ -67,6 +68,9 @@ export default class Form extends PureComponent {
         return (
           <Select field={field} options={field.options} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)} />
         );
+
+      case FIELD_TYPES.SET_ID:
+        return <SetId field={field} value={model[field.id]} sets={options.sets} onChange={value => this.handleChangeModelValue(field.id, value)} />;
 
       default:
         return null;

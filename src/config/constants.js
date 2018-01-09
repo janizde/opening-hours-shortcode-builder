@@ -2,6 +2,7 @@ export const FIELD_TYPES = {
   TEXT: 'TEXT',
   SELECT: 'SELECT',
   CHECKBOX: 'CHECKBOX',
+  SET_ID: 'SET_ID',
 };
 
 export const SHORTCODE_TYPES = {

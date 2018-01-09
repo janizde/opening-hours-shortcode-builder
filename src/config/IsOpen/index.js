@@ -7,6 +7,12 @@ export default {
   shortcode: 'is-open',
   fields: [
     {
+      id: 'set_id',
+      label: 'Set ID',
+      description: 'ID of the set for which this shortcode should be used',
+      type: FIELD_TYPES.SET_ID,
+    },
+    {
       id: 'before_widget',
       label: 'Before widget',
       description: 'HTML markup before widget',
