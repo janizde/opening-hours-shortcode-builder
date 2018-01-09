@@ -1,0 +1,5 @@
+# .prettierrc
+printWidth: 150
+parser: flow
+singleQuote: true
+trailingComma: es5
