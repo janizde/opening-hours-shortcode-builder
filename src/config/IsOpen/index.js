@@ -4,6 +4,7 @@ import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 export default {
   id: SHORTCODE_TYPES.IS_OPEN,
   label: 'Is Open',
+  shortcode: 'is-open',
   fields: [
     {
       id: 'before_widget',
@@ -54,7 +55,7 @@ export default {
       type: FIELD_TYPES.TEXT,
       default: (
         <span>
-          We\'re currently closed for <code>%1$s</code>.
+          We're currently closed for <code>%1$s</code>.
         </span>
       ),
       placeholders: [
@@ -69,7 +70,7 @@ export default {
       label: 'Show next open period',
       description: 'Whether to show the next open period when closed or not',
       type: FIELD_TYPES.CHECKBOX,
-      default: false,
+      default: 'Disabled',
     },
     {
       id: 'next_format',

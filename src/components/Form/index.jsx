@@ -87,7 +87,7 @@ export default class Form extends PureComponent {
     const shortcodeConfig = ShortcodeConfigs[shortcode];
 
     return (
-      <div className={'card mb-5'}>
+      <div className={'card mt-5 mb-5'}>
         <div className={'card-header'}>
           <ShortcodeSelect
             options={Object.values(ShortcodeConfigs).map(config => ({

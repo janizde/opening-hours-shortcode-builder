@@ -15,13 +15,16 @@ export default class ShortcodeSelect extends PureComponent {
     const {options, value, onChange} = this.props;
 
     return (
-      <div className={'form-group'}>
-        <label htmlFor={'select-shortcode'}>Select Shortcode</label>
-        <select id={'select-shortcode'} className={'form-control'} value={value} onChange={event => onChange(event.target.value)}>
-          {options.map(option => (
-            <option key={option.id} value={option.id}>{option.label}</option>
-          ))}
-        </select>
+      <div className={'form-inline'}>
+        <div className={'form-group'}>
+          <label htmlFor={'select-shortcode'}>Select Shortcode</label>
+          &nbsp;&nbsp;
+          <select id={'select-shortcode'} className={'form-control'} value={value} onChange={event => onChange(event.target.value)}>
+            {options.map(option => (
+              <option key={option.id} value={option.id}>{option.label}</option>
+            ))}
+          </select>
+        </div>
       </div>
     );
   }
