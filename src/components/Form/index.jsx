@@ -1,12 +1,13 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
-import { SHORTCODE_TYPES, FIELD_TYPES } from "../../config/constants";
-import ShortcodeConfigs from "./../../config";
+import { SHORTCODE_TYPES, FIELD_TYPES } from '../../config/constants';
+import ShortcodeConfigs from './../../config';
+import formatShortcode from './../../formatter';
 
-import ShortcodeSelect from "./ShortcodeSelect";
-import Text from "./../Fields/Text";
-import Checkbox from "./../Fields/Checkbox";
-import Select from "./../Fields/Select";
+import ShortcodeSelect from './ShortcodeSelect';
+import Text from './../Fields/Text';
+import Checkbox from './../Fields/Checkbox';
+import Select from './../Fields/Select';
 
 const Aux = props => props.children;
 
@@ -14,7 +15,7 @@ const createEmptyModel = fields =>
   fields.map(field => field.id).reduce(
     (model, fieldId) => ({
       ...model,
-      [fieldId]: null
+      [fieldId]: null,
     }),
     {}
   );
@@ -25,7 +26,7 @@ export default class Form extends PureComponent {
 
     this.state = {
       shortcode: SHORTCODE_TYPES.IS_OPEN,
-      model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields)
+      model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields),
     };
 
     this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
@@ -36,7 +37,7 @@ export default class Form extends PureComponent {
     this.setState(prevState => ({
       ...prevState,
       shortcode: newType,
-      model: createEmptyModel(ShortcodeConfigs[newType].fields)
+      model: createEmptyModel(ShortcodeConfigs[newType].fields),
     }));
   }
 
@@ -45,8 +46,8 @@ export default class Form extends PureComponent {
       ...prevState,
       model: {
         ...prevState.model,
-        [key]: value
-      }
+        [key]: value,
+      },
     }));
   }
 
@@ -55,26 +56,14 @@ export default class Form extends PureComponent {
 
     switch (field.type) {
       case FIELD_TYPES.TEXT:
-        return (
-          <Text
-            field={field}
-            value={model[field.id]}
-            onChange={value => this.handleChangeModelValue(field.id, value)}
-          />
-        );
+        return <Text field={field} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)} />;
 
       case FIELD_TYPES.CHECKBOX:
-        return (
-          <Checkbox
-            field={field}
-            value={model[field.id]}
-            onChange={value => this.handleChangeModelValue(field.id, value)}
-          />
-        );
+        return <Checkbox field={field} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)} />;
 
       case FIELD_TYPES.SELECT:
         return (
-          <Select field={field} options={field.options} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)}/>
+          <Select field={field} options={field.options} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)} />
         );
 
       default:
@@ -92,21 +81,24 @@ export default class Form extends PureComponent {
           <ShortcodeSelect
             options={Object.values(ShortcodeConfigs).map(config => ({
               id: config.id,
-              label: config.label
+              label: config.label,
             }))}
             value={shortcode}
             onChange={this.handleChangeShortcodeType}
           />
         </div>
+
         <div className={'card-body'}>
-          <ul className="list-group list-group-flush">
-            {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
-              <li className={'list-group-item'} key={field.id}>
-                {this.renderField(field)}
-              </li>
-            ))}
-          </ul>
+          <textarea readOnly className={'form-control font-mono'} value={formatShortcode(shortcodeConfig.shortcode, model)} />
         </div>
+
+        <ul className="list-group list-group-flush">
+          {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
+            <li className={'list-group-item'} key={field.id}>
+              {this.renderField(field)}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }

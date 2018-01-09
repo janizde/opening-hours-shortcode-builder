@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import Form from './components/Form';
 
+import './app.css';
+
 class App extends Component {
   render() {
     return (
