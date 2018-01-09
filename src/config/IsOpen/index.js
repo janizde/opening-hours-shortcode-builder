@@ -10,14 +10,14 @@ export default {
       label: 'Before widget',
       description: 'HTML markup before widget',
       type: FIELD_TYPES.TEXT,
-      default: '<div class="op-is-open-shortcode">',
+      default: <code>{'<div class="op-is-open-shortcode">'}</code>,
     },
     {
       id: 'after_widget',
       label: 'After widget',
       description: 'HTML markup after widget',
       type: FIELD_TYPES.TEXT,
-      default: '</div>',
+      default: <code>{'</div>'}</code>,
     },
     {
       id: 'before_title',
@@ -31,7 +31,7 @@ export default {
       label: 'After title',
       description: 'HTML markup after title',
       type: FIELD_TYPES.TEXT,
-      default: '</div>',
+      default: <code>{'</div>'}</code>,
     },
     {
       id: 'open_text',

@@ -6,7 +6,7 @@ export const createComponentWithClassName = (className, displayName) => {
     <div className={className} {...restProps}>{children}</div>
   );
 
-  ClassNameComponent.displayName = 'displayName';
+  ClassNameComponent.displayName = displayName;
 
   ClassNameComponent.propTypes = {
     children: PropTypes.node,

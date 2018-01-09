@@ -4,7 +4,9 @@ import { SHORTCODE_TYPES, FIELD_TYPES } from "../../config/constants";
 import ShortcodeConfigs from "./../../config";
 
 import ShortcodeSelect from "./ShortcodeSelect";
-import Text from './../Fields/Text';
+import Text from "./../Fields/Text";
+
+const Aux = props => props.children;
 
 const createEmptyModel = fields =>
   fields.map(field => field.id).reduce(
@@ -21,9 +23,7 @@ export default class Form extends PureComponent {
 
     this.state = {
       shortcode: SHORTCODE_TYPES.IS_OPEN,
-      model: createEmptyModel(
-        ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields
-      )
+      model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields)
     };
 
     this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
@@ -43,13 +43,32 @@ export default class Form extends PureComponent {
       ...prevState,
       model: {
         ...prevState.model,
-        [key]: value,
-      },
+        [key]: value
+      }
     }));
   }
 
+  renderField(field) {
+    const { model } = this.state;
+
+    switch (field.type) {
+      case FIELD_TYPES.TEXT:
+        return (<Text
+          key={field.id}
+          field={field}
+          value={model[field.id]}
+          onChange={value =>
+            this.handleChangeModelValue(field.id, value)
+          }
+        />);
+
+      default:
+        return null;
+    }
+  }
+
   render() {
-    const { shortcode, model } = this.state;
+    const { shortcode } = this.state;
     const shortcodeConfig = ShortcodeConfigs[shortcode];
 
     return (
@@ -63,17 +82,12 @@ export default class Form extends PureComponent {
           onChange={this.handleChangeShortcodeType}
         />
 
-        {shortcodeConfig.fields.map(field => {
-          switch (field.type) {
-            case FIELD_TYPES.TEXT:
-              return (
-                <Text key={field.id} field={field} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)} />
-              );
-
-            default:
-              return null;
-          }
-        })}
+        {shortcodeConfig.fields.map(field => (
+          <Aux>
+            {this.renderField(field)}
+            <hr className={'divider'} />
+          </Aux>
+        ))}
       </form>
     );
   }
