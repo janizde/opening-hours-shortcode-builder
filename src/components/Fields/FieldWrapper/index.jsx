@@ -18,13 +18,11 @@ export default class FieldWrapper extends PureComponent {
     return (
       <Row>
         <LeftCol>
-          <div className={'form-group'}>
             {children}
 
             {field.description && (
               <span className={'form-text text-muted'}>{field.description}</span>
             )}
-          </div>
         </LeftCol>
         <RightCol>
           <span className={'badge badge-primary'}>Default</span> <span>{field.default}</span>

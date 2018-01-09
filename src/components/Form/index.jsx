@@ -5,6 +5,7 @@ import ShortcodeConfigs from "./../../config";
 
 import ShortcodeSelect from "./ShortcodeSelect";
 import Text from "./../Fields/Text";
+import Checkbox from "./../Fields/Checkbox";
 
 const Aux = props => props.children;
 
@@ -53,14 +54,24 @@ export default class Form extends PureComponent {
 
     switch (field.type) {
       case FIELD_TYPES.TEXT:
-        return (<Text
-          key={field.id}
-          field={field}
-          value={model[field.id]}
-          onChange={value =>
-            this.handleChangeModelValue(field.id, value)
-          }
-        />);
+        return (
+          <Text
+            key={field.id}
+            field={field}
+            value={model[field.id]}
+            onChange={value => this.handleChangeModelValue(field.id, value)}
+          />
+        );
+
+      case FIELD_TYPES.CHECKBOX:
+        return (
+          <Checkbox
+            key={field.id}
+            field={field}
+            value={model[field.id]}
+            onChange={value => this.handleChangeModelValue(field.id, value)}
+          />
+        );
 
       default:
         return null;
@@ -85,7 +96,7 @@ export default class Form extends PureComponent {
         {shortcodeConfig.fields.map(field => (
           <Aux>
             {this.renderField(field)}
-            <hr className={'divider'} />
+            <hr className={"divider"} />
           </Aux>
         ))}
       </form>

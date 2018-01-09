@@ -5,10 +5,10 @@ import CustomPropTypes from './../../../prop-types';
 
 import FieldWrapper from './../FieldWrapper';
 
-export default class TextField extends PureComponent {
+export default class CheckboxField extends PureComponent {
   static propTypes = {
     field: CustomPropTypes.fieldConfig,
-    value: PropTypes.string,
+    value: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
     children: PropTypes.node,
   };
@@ -18,8 +18,12 @@ export default class TextField extends PureComponent {
 
     return (
       <FieldWrapper field={field}>
-        <label htmlFor={`field-${field.id}`}>{field.label}</label>
-        <input type={'text'} className={'form-control'} id={`field-${field.id}`} value={value || ''} onChange={event => onChange(event.target.value)} />
+        <div className={'form-check'}>
+          <input type={'checkbox'} className={'form-check-input'} id={`field-${field.id}`} value={value} onChange={event => onChange(event.target.checked)} />
+          <label htmlFor={`field-${field.id}`} className={'form-check-label'}>
+            {field.label}
+          </label>
+        </div>
       </FieldWrapper>
     );
   }
