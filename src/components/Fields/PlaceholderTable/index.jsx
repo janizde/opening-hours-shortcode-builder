@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
+import CustomPropTypes from './../../../prop-types';
+
 export default class PlaceholderTable extends PureComponent {
   static propTypes = {
-    placeholders: PropTypes.objectOf(PropTypes.string.isRequired).isRequired
+    placeholders: CustomPropTypes.placeholders.isRequired,
   };
 
   render() {
@@ -14,7 +16,7 @@ export default class PlaceholderTable extends PureComponent {
         <h5>Placeholders</h5>
         <table className={"table table-sm table-bordered mt-2"}>
           <tbody>
-          {Object.entries(placeholders).map(([key, label]) => (
+          {placeholders.map(({ key, label }) => (
             <tr>
               <th scope={"row"}>
                 <pre>{key}</pre>
@@ -24,7 +26,6 @@ export default class PlaceholderTable extends PureComponent {
           ))}
           </tbody>
         </table>
-
       </div>
     );
   }

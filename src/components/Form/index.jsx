@@ -79,7 +79,7 @@ export default class Form extends PureComponent {
   }
 
   render() {
-    const { shortcode } = this.state;
+    const { shortcode, model } = this.state;
     const shortcodeConfig = ShortcodeConfigs[shortcode];
 
     return (
@@ -93,7 +93,7 @@ export default class Form extends PureComponent {
           onChange={this.handleChangeShortcodeType}
         />
 
-        {shortcodeConfig.fields.map(field => (
+        {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
           <Aux>
             {this.renderField(field)}
             <hr className={"divider"} />
