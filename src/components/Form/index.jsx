@@ -6,6 +6,7 @@ import ShortcodeConfigs from "./../../config";
 import ShortcodeSelect from "./ShortcodeSelect";
 import Text from "./../Fields/Text";
 import Checkbox from "./../Fields/Checkbox";
+import Select from "./../Fields/Select";
 
 const Aux = props => props.children;
 
@@ -69,6 +70,11 @@ export default class Form extends PureComponent {
             value={model[field.id]}
             onChange={value => this.handleChangeModelValue(field.id, value)}
           />
+        );
+
+      case FIELD_TYPES.SELECT:
+        return (
+          <Select field={field} options={field.options} value={model[field.id]} onChange={value => this.handleChangeModelValue(field.id, value)}/>
         );
 
       default:

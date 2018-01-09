@@ -146,7 +146,7 @@ export default {
           label: 'The formatted end time of the last period',
         },
       ],
-      show: model => model.show_today !== 'never',
+      show: model => model.show_today && model.show_today !== 'never',
     },
     {
       id: 'date_format',
