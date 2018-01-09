@@ -87,23 +87,27 @@ export default class Form extends PureComponent {
     const shortcodeConfig = ShortcodeConfigs[shortcode];
 
     return (
-      <form>
-        <ShortcodeSelect
-          options={Object.values(ShortcodeConfigs).map(config => ({
-            id: config.id,
-            label: config.label
-          }))}
-          value={shortcode}
-          onChange={this.handleChangeShortcodeType}
-        />
-
-        {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
-          <Aux key={field.id}>
-            {this.renderField(field)}
-            <hr className={"divider"} />
-          </Aux>
-        ))}
-      </form>
+      <div className={'card mb-5'}>
+        <div className={'card-header'}>
+          <ShortcodeSelect
+            options={Object.values(ShortcodeConfigs).map(config => ({
+              id: config.id,
+              label: config.label
+            }))}
+            value={shortcode}
+            onChange={this.handleChangeShortcodeType}
+          />
+        </div>
+        <div className={'card-body'}>
+          <ul className="list-group list-group-flush">
+            {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
+              <li className={'list-group-item'} key={field.id}>
+                {this.renderField(field)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     );
   }
 }
