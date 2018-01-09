@@ -10,15 +10,10 @@ export default class PlaceholderTable extends PureComponent {
     const { placeholders } = this.props;
 
     return (
-      <table className={"table table-sm table-bordered mt-2"}>
-        <thead>
-          <tr>
-            <th colspan={2} scope={"col"}>
-              Placeholders
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+      <div className={'mt-4'}>
+        <h5>Placeholders</h5>
+        <table className={"table table-sm table-bordered mt-2"}>
+          <tbody>
           {Object.entries(placeholders).map(([key, label]) => (
             <tr>
               <th scope={"row"}>
@@ -27,8 +22,10 @@ export default class PlaceholderTable extends PureComponent {
               <td>{label}</td>
             </tr>
           ))}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+
+      </div>
     );
   }
 }
