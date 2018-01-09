@@ -5,6 +5,7 @@ import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
 
 import ShortcodeSelect from './ShortcodeSelect';
+import ShortcodeDisplay from './ShortcodeDisplay';
 import Text from './../Fields/Text';
 import Checkbox from './../Fields/Checkbox';
 import Select from './../Fields/Select';
@@ -89,7 +90,7 @@ export default class Form extends PureComponent {
         </div>
 
         <div className={'card-body'}>
-          <textarea readOnly className={'form-control font-mono'} value={formatShortcode(shortcodeConfig.shortcode, model)} />
+          <ShortcodeDisplay shortcode={formatShortcode(shortcodeConfig.shortcode, model)} />
         </div>
 
         <ul className="list-group list-group-flush">
