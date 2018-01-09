@@ -13,7 +13,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prettify": "prettier all --write \"app/**/*.js\""
+    "prettify": "prettier all --write \"src/**/*.js\""
   },
   "devDependencies": {
     "prettier": "^1.9.2"
