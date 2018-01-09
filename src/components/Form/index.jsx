@@ -56,7 +56,6 @@ export default class Form extends PureComponent {
       case FIELD_TYPES.TEXT:
         return (
           <Text
-            key={field.id}
             field={field}
             value={model[field.id]}
             onChange={value => this.handleChangeModelValue(field.id, value)}
@@ -66,7 +65,6 @@ export default class Form extends PureComponent {
       case FIELD_TYPES.CHECKBOX:
         return (
           <Checkbox
-            key={field.id}
             field={field}
             value={model[field.id]}
             onChange={value => this.handleChangeModelValue(field.id, value)}
@@ -94,7 +92,7 @@ export default class Form extends PureComponent {
         />
 
         {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
-          <Aux>
+          <Aux key={field.id}>
             {this.renderField(field)}
             <hr className={"divider"} />
           </Aux>

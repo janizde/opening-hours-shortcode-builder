@@ -19,7 +19,7 @@ export default class CheckboxField extends PureComponent {
     return (
       <FieldWrapper field={field}>
         <div className={'form-check'}>
-          <input type={'checkbox'} className={'form-check-input'} id={`field-${field.id}`} value={value} onChange={event => onChange(event.target.checked)} />
+          <input type={'checkbox'} className={'form-check-input'} id={`field-${field.id}`} value={!!value} onChange={event => onChange(event.target.checked)} />
           <label htmlFor={`field-${field.id}`} className={'form-check-label'}>
             {field.label}
           </label>
