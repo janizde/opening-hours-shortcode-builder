@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { SHORTCODE_TYPES, FIELD_TYPES } from '../../config/constants';
 import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
+import parseOptions from './../../optionParser';
 
 import ShortcodeSelect from './ShortcodeSelect';
 import ShortcodeDisplay from './ShortcodeDisplay';
@@ -27,6 +28,8 @@ export default class Form extends PureComponent {
       shortcode: SHORTCODE_TYPES.IS_OPEN,
       model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields),
     };
+
+    console.log(parseOptions());
 
     this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
     this.handleChangeModelValue = this.handleChangeModelValue.bind(this);
