@@ -10,8 +10,6 @@ import Text from './../Fields/Text';
 import Checkbox from './../Fields/Checkbox';
 import Select from './../Fields/Select';
 
-const Aux = props => props.children;
-
 const createEmptyModel = fields =>
   fields.map(field => field.id).reduce(
     (model, fieldId) => ({
