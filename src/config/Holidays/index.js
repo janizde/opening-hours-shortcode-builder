@@ -85,6 +85,6 @@ export default {
       label: 'CSS class for highlighted holidays',
       default: <code>highlighted</code>,
       type: FIELD_TYPES.TEXT,
-    }
+    },
   ],
 };

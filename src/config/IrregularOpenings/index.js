@@ -94,6 +94,6 @@ export default {
       label: 'CSS class for highlighted irregular openings',
       default: <code>highlighted</code>,
       type: FIELD_TYPES.TEXT,
-    }
+    },
   ],
 };
