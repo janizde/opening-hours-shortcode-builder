@@ -4,13 +4,19 @@ import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 export default {
   id: SHORTCODE_TYPES.IS_OPEN,
   label: 'Is Open',
-  shortcode: 'is-open',
+  shortcode: 'op-is-open',
   fields: [
     {
       id: 'set_id',
       label: 'Set ID',
       description: 'ID of the set for which this shortcode should be used',
       type: FIELD_TYPES.SET_ID,
+    },
+    {
+      id: 'title',
+      label: 'Title',
+      description: 'Shortcode header title',
+      type: FIELD_TYPES.TEXT,
     },
     {
       id: 'before_widget',
@@ -31,14 +37,14 @@ export default {
       label: 'Before title',
       description: 'HTML markup before title',
       type: FIELD_TYPES.TEXT,
-      default: <code>{'<div class="op-is-open-shortcode">'}</code>,
+      default: <code>{'<h3 class="op-is-open-title">'}</code>,
     },
     {
       id: 'after_title',
       label: 'After title',
       description: 'HTML markup after title',
       type: FIELD_TYPES.TEXT,
-      default: <code>{'</div>'}</code>,
+      default: <code>{'</h3>'}</code>,
     },
     {
       id: 'open_text',
@@ -106,6 +112,12 @@ export default {
           label: 'The formatted end time of the next open period',
         },
       ],
+      show: model => model.show_next === true,
+    },
+    {
+      id: 'next_period_classes',
+      label: 'Next period CSS class',
+      type: FIELD_TYPES.TEXT,
       show: model => model.show_next === true,
     },
     {
@@ -184,6 +196,18 @@ export default {
       ),
       type: FIELD_TYPES.TEXT,
       default: 'WordPress setting',
+    },
+    {
+      id: 'open_class',
+      label: 'CSS class when open',
+      default: <code>op-open</code>,
+      type: FIELD_TYPES.TEXT,
+    },
+    {
+      id: 'closed_class',
+      label: 'CSS class when closed',
+      default: <code>op-closed</code>,
+      type: FIELD_TYPES.TEXT,
     },
   ],
 };

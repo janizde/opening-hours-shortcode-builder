@@ -24,6 +24,7 @@ const fieldConfig = PropTypes.shape({
   placeholders,
   options,
   show: PropTypes.func,
+  attributes: PropTypes.object,
 });
 
 export default {

@@ -19,7 +19,7 @@ export default class TextField extends PureComponent {
     return (
       <FieldWrapper field={field}>
         <label htmlFor={`field-${field.id}`}>{field.label}</label>
-        <input type={'text'} className={'form-control'} id={`field-${field.id}`} value={value || ''} onChange={event => onChange(event.target.value)} />
+        <input type={'text'} className={'form-control'} {...field.attributes} id={`field-${field.id}`} value={value || ''} onChange={event => onChange(event.target.value)} />
       </FieldWrapper>
     );
   }
