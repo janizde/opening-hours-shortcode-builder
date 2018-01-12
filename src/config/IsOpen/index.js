@@ -4,7 +4,6 @@ import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 export default {
   id: SHORTCODE_TYPES.IS_OPEN,
   label: 'Is Open',
-  shortcode: 'op-is-open',
   fields: [
     {
       id: 'set_id',

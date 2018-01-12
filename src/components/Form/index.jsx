@@ -27,9 +27,11 @@ export default class Form extends PureComponent {
   constructor(props) {
     super(props);
 
+    const initialShortcodeId = options.shortcode && Object.values(SHORTCODE_TYPES).indexOf(options.shortcode) > -1 ? options.shortcode : SHORTCODE_TYPES.OVERVIEW;
+
     this.state = {
-      shortcode: SHORTCODE_TYPES.IS_OPEN,
-      model: createEmptyModel(ShortcodeConfigs[SHORTCODE_TYPES.IS_OPEN].fields),
+      shortcode: initialShortcodeId,
+      model: createEmptyModel(ShortcodeConfigs[initialShortcodeId].fields),
     };
 
     this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
@@ -95,7 +97,7 @@ export default class Form extends PureComponent {
         </div>
 
         <div className={'card-body'}>
-          <ShortcodeDisplay shortcode={formatShortcode(shortcodeConfig.shortcode, model)} />
+          <ShortcodeDisplay shortcode={formatShortcode(shortcodeConfig.id, model)} />
         </div>
 
         <ul className="list-group list-group-flush">

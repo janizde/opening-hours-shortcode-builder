@@ -6,8 +6,8 @@ export const FIELD_TYPES = {
 };
 
 export const SHORTCODE_TYPES = {
-  IS_OPEN: 'IS_OPEN',
-  OVERVIEW: 'OVERVIEW',
-  HOLIDAYS: 'HOLIDAYS',
-  IRREGULAR_OPENINGS: 'IRREGULAR_OPENINGS',
+  IS_OPEN: 'op-is-open',
+  OVERVIEW: 'op-overview',
+  HOLIDAYS: 'op-holidays',
+  IRREGULAR_OPENINGS: 'op-irregular-openings',
 };

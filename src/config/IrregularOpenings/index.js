@@ -4,7 +4,6 @@ import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 export default {
   id: SHORTCODE_TYPES.IRREGULAR_OPENINGS,
   label: 'Irregular Openings',
-  shortcode: 'op-irregular-openings',
   fields: [
     {
       id: 'set_id',

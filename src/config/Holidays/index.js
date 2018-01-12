@@ -4,7 +4,6 @@ import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 export default {
   id: SHORTCODE_TYPES.HOLIDAYS,
   label: 'Holidays',
-  shortcode: 'op-holidays',
   fields: [
     {
       id: 'set_id',
