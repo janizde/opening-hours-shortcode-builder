@@ -1,7 +1,17 @@
 import * as React from 'react';
-import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 
-export default {
+import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+
+export interface IIrregularOpeningsModel extends IShortcodeModel {
+  highlight: boolean;
+  include_past: boolean;
+  date_format: string;
+  time_format: string;
+  class_highlighted: string;
+}
+
+const shortcodeConfig: IShortcodeConfig<IIrregularOpeningsModel> = {
   id: SHORTCODE_TYPES.IRREGULAR_OPENINGS,
   label: 'Irregular Openings',
   fields: [
@@ -96,3 +106,5 @@ export default {
     },
   ],
 };
+
+export default shortcodeConfig;

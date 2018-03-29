@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 
 import { SHORTCODE_TYPES, FIELD_TYPES } from '../../config/constants';
 import ShortcodeConfigs from './../../config';

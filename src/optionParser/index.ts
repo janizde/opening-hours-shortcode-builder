@@ -1,11 +1,29 @@
-export default function parseOptions() {
+import { spec, symbol, valid, explain } from 'js.spec';
+
+import { SHORTCODE_TYPES } from '../config/constants';
+import { IAppOptions } from '../typings';
+
+const appOptionsSpec = spec.map('App options', {
+  [symbol.optional]: {
+    shortcode: spec.oneOf('shortcode tag', Object.keys(SHORTCODE_TYPES).map(key => SHORTCODE_TYPES[key])),
+    sets: spec.map('sets', {}),
+  },
+});
+
+export default function parseOptions(): IAppOptions | null {
   try {
     const hash = window.location.hash.substr(1);
     const decoded = window.atob(hash);
     const options = JSON.parse(decoded);
-    return typeof options === 'object' ? options : {};
+
+    if (!valid(appOptionsSpec, options)) {
+      console.warn(`Specified app options are invalid: ${explain(appOptionsSpec, options)}`);
+      return null;
+    }
+
+    return options;
   } catch (e) {
     // options are not properly encoded
-    return {};
+    return null;
   }
 }

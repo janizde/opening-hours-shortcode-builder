@@ -1,7 +1,24 @@
 import * as React from 'react';
-import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 
-export default {
+import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+
+export interface IIsOpenModel extends IShortcodeModel {
+  open_text: string;
+  closed_text: string;
+  closed_holiday_text: string;
+  show_next: boolean;
+  next_format: string;
+  next_period_classes: string;
+  show_today: string;
+  today_format: string;
+  date_format: string;
+  time_format: string;
+  open_class: string;
+  closed_class: string;
+}
+
+const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
   id: SHORTCODE_TYPES.IS_OPEN,
   label: 'Is Open',
   fields: [
@@ -22,14 +39,14 @@ export default {
       label: 'Open text',
       description: 'Text that will be shown when the selected set is currently open',
       type: FIELD_TYPES.TEXT,
-      default: "We're currently open.",
+      default: 'We\'re currently open.',
     },
     {
       id: 'closed_text',
       label: 'Closed text',
       description: 'Text that will be shown when the selected set is currently closed',
       type: FIELD_TYPES.TEXT,
-      default: "We're currently closed.",
+      default: 'We\'re currently closed.',
     },
     {
       id: 'closed_holiday_text',
@@ -93,8 +110,8 @@ export default {
     },
     {
       id: 'show_today',
-      label: "Show today's opening hours",
-      description: "Specify in which cases today's opening hours shall be displayed in the widget",
+      label: 'Show today\'s opening hours',
+      description: 'Specify in which cases today\'s opening hours shall be displayed in the widget',
       type: FIELD_TYPES.SELECT,
       options: [
         {
@@ -115,7 +132,7 @@ export default {
     {
       id: 'today_format',
       label: 'Today format',
-      description: "Text format of today's opening hours",
+      description: 'Text format of today\'s opening hours',
       type: FIELD_TYPES.TEXT,
       default: (
         <span>
@@ -136,7 +153,7 @@ export default {
           label: 'The formatted end time of the last period',
         },
       ],
-      show: model => model.show_today && model.show_today !== 'never',
+      show: model => model.show_today !== 'never',
     },
     {
       id: 'date_format',
@@ -210,3 +227,5 @@ export default {
     },
   ],
 };
+
+export default shortcodeConfig;
