@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import * as React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ShortcodeSelect extends PureComponent {
@@ -12,7 +12,7 @@ export default class ShortcodeSelect extends PureComponent {
   };
 
   render() {
-    const {options, value, onChange} = this.props;
+    const { options, value, onChange } = this.props;
 
     return (
       <div className={'form-inline'}>

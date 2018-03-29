@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
 
 export default {
-  id: SHORTCODE_TYPES.IRREGULAR_OPENINGS,
-  label: 'Irregular Openings',
+  id: SHORTCODE_TYPES.HOLIDAYS,
+  label: 'Holidays',
   fields: [
     {
       id: 'set_id',
@@ -20,13 +20,13 @@ export default {
     {
       id: 'highlight',
       label: 'Highlight',
-      description: 'Highlight active irregular opening',
+      description: 'Highlight active holidays',
       type: FIELD_TYPES.CHECKBOX,
       default: 'Disabled',
     },
     {
       id: 'include_past',
-      label: 'Include past irregular openings',
+      label: 'Include past holidays',
       type: FIELD_TYPES.CHECKBOX,
       default: 'Disabled',
     },
@@ -35,7 +35,7 @@ export default {
       label: 'Date format',
       description: (
         <span>
-          <span>PHP date format for the date of irregular openings.</span>
+          <span>PHP date format for the date of holidays.</span>
           &nbsp;
           <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
             More on PHP date and time formats
@@ -46,23 +46,14 @@ export default {
       default: 'WordPress setting',
     },
     {
-      id: 'time_format',
-      label: 'Time format',
-      description: (
-        <span>
-          <span>PHP time format for the time of irregular openings.</span>
-          &nbsp;
-          <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
-            More on PHP date and time formats
-          </a>
-        </span>
-      ),
+      id: 'class_holidays',
+      label: 'CSS class for holiday',
+      default: <code>op-holiday</code>,
       type: FIELD_TYPES.TEXT,
-      default: 'WordPress setting',
     },
     {
       id: 'class_highlighted',
-      label: 'CSS class for highlighted irregular openings',
+      label: 'CSS class for highlighted holidays',
       default: <code>highlighted</code>,
       type: FIELD_TYPES.TEXT,
     },
@@ -71,7 +62,7 @@ export default {
       label: 'Before widget',
       description: 'HTML markup before widget',
       type: FIELD_TYPES.TEXT,
-      default: <code>{'<div class="op-irregular-openings-shortcode">'}</code>,
+      default: <code>{'<div class="op-holidays-shortcode">'}</code>,
     },
     {
       id: 'after_widget',
@@ -85,7 +76,7 @@ export default {
       label: 'Before title',
       description: 'HTML markup before title',
       type: FIELD_TYPES.TEXT,
-      default: <code>{'<h3 class="op-irregular-openings-title">'}</code>,
+      default: <code>{'<h3 class="op-holidays-title">'}</code>,
     },
     {
       id: 'after_title',

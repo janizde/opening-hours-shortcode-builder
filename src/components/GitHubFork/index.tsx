@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const GitHubFork = () => (
   <a href="https://github.com/janizde/opening-hours-shortcode-builder">
