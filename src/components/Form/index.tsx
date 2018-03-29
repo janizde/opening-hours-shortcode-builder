@@ -1,4 +1,4 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react'
 
 import { SHORTCODE_TYPES, FIELD_TYPES } from '../../config/constants';
 import ShortcodeConfigs from './../../config';
@@ -23,7 +23,7 @@ const createEmptyModel = fields =>
 
 const options = parseOptions();
 
-export default class Form extends PureComponent {
+export default class Form extends React.PureComponent<any> {
   constructor(props) {
     super(props);
 

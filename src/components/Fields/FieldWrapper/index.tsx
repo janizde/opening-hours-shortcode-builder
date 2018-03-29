@@ -1,4 +1,4 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import { Row, LeftCol, RightCol } from './../../UI';
@@ -6,7 +6,7 @@ import CustomPropTypes from './../../../prop-types';
 
 import PlaceholderTable from './../PlaceholderTable';
 
-export default class FieldWrapper extends PureComponent {
+export default class FieldWrapper extends React.PureComponent<any> {
   static propTypes = {
     field: CustomPropTypes.fieldConfig.isRequired,
     children: PropTypes.node,

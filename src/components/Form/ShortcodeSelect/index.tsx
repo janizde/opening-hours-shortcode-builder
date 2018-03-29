@@ -1,7 +1,7 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ShortcodeSelect extends PureComponent {
+export default class ShortcodeSelect extends React.PureComponent<any> {
   static propTypes = {
     options: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,

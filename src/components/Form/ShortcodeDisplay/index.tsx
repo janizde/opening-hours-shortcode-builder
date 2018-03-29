@@ -1,9 +1,9 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import copy from 'copy-to-clipboard';
 
-export default class ShortcodeDisplay extends PureComponent {
+export default class ShortcodeDisplay extends React.PureComponent<any> {
   static propTypes = {
     shortcode: PropTypes.string.isRequired,
   };

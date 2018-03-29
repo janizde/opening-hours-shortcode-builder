@@ -1,11 +1,11 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import CustomPropTypes from './../../../prop-types';
 
 import FieldWrapper from './../FieldWrapper';
 
-export default class TextField extends PureComponent {
+export default class TextField extends React.PureComponent<any> {
   static propTypes = {
     field: CustomPropTypes.fieldConfig,
     value: PropTypes.string,

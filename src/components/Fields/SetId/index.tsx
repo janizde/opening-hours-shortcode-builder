@@ -1,11 +1,11 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import CustomPropTypes from './../../../prop-types';
 import Text from './../Text';
 import Select from './../Select';
 
-export default class SetIdField extends PureComponent {
+export default class SetIdField extends React.PureComponent<any> {
   static propTypes = {
     field: CustomPropTypes.fieldConfig.isRequired,
     sets: PropTypes.objectOf(PropTypes.string.isRequired),

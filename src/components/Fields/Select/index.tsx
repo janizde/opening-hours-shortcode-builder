@@ -1,11 +1,11 @@
-import * as React, { PureComponent } from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
 import CustomPropTypes from './../../../prop-types';
 
 import FieldWrapper from './../FieldWrapper';
 
-export default class SelectField extends PureComponent {
+export default class SelectField extends React.PureComponent<any> {
   static propTypes = {
     field: CustomPropTypes.fieldConfig.isRequired,
     options: CustomPropTypes.options.isRequired,

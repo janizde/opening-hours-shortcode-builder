@@ -2,7 +2,7 @@ import * as React, { PureComponent } from "react";
 
 import CustomPropTypes from './../../../prop-types';
 
-export default class PlaceholderTable extends PureComponent {
+export default class PlaceholderTable extends React.PureComponent<any> {
   static propTypes = {
     placeholders: CustomPropTypes.placeholders.isRequired,
   };
