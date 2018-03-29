@@ -1,7 +1,17 @@
-import React from 'react';
-import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import * as React from 'react';
 
-export default {
+import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+
+export interface IHolidaysModel extends IShortcodeModel {
+  highlight: boolean;
+  include_past: boolean;
+  date_format: string;
+  class_holidays: string;
+  class_highlighted: string;
+}
+
+const shortcodeConfig: IShortcodeConfig<IHolidaysModel> = {
   id: SHORTCODE_TYPES.HOLIDAYS,
   label: 'Holidays',
   fields: [
@@ -87,3 +97,5 @@ export default {
     },
   ],
 };
+
+export default shortcodeConfig;
