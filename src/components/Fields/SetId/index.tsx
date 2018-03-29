@@ -1,22 +1,19 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
-import CustomPropTypes from './../../../prop-types';
+import { IFieldProps } from './../../typings';
+import { ISetMap } from './../../../typings';
 import Text from './../Text';
 import Select from './../Select';
 
-export default class SetIdField extends React.PureComponent<any> {
-  static propTypes = {
-    field: CustomPropTypes.fieldConfig.isRequired,
-    sets: PropTypes.objectOf(PropTypes.string.isRequired),
-    value: PropTypes.string,
-    onChange: PropTypes.func.isRequired,
-  };
+interface ISetIdFieldProps extends IFieldProps {
+  sets: ISetMap;
+}
 
+export default class SetIdField extends React.PureComponent<ISetIdFieldProps> {
   componentWillMount() {
     const { sets, value, onChange } = this.props;
 
-    if (sets && sets.length > 0 && (!value || value.length < 1)) {
+    if (sets && Object.keys(sets).length > 0 && (!value || value.length < 1)) {
       onChange(Object.keys(sets)[0]);
     }
   }
@@ -31,9 +28,9 @@ export default class SetIdField extends React.PureComponent<any> {
     return (
       <Select
         {...restProps}
-        options={Object.entries(sets).map(([setId, name]) => ({
+        options={Object.keys(sets).map(setId => ({
           value: setId,
-          label: name,
+          label: sets[setId],
         }))}
       />
     );

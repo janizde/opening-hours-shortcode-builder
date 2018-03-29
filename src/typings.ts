@@ -49,9 +49,11 @@ export interface IShortcodeModel {
   after_title: string;
 }
 
+export interface ISetMap {
+  [setId: string]: string;
+}
+
 export interface IAppOptions {
   shortcode: TShortcodeType;
-  sets: {
-    [setId: string]: string;
-  };
+  sets: ISetMap;
 }

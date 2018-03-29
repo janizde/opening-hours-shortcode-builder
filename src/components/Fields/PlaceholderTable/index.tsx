@@ -1,23 +1,23 @@
-import * as React, { PureComponent } from "react";
+import * as React from 'react';
 
-import CustomPropTypes from './../../../prop-types';
+import { IPlaceholder } from './../../../typings';
 
-export default class PlaceholderTable extends React.PureComponent<any> {
-  static propTypes = {
-    placeholders: CustomPropTypes.placeholders.isRequired,
-  };
+interface IPlaceholderTableProps {
+  placeholders: Array<IPlaceholder>;
+}
 
+export default class PlaceholderTable extends React.PureComponent<IPlaceholderTableProps> {
   render() {
     const { placeholders } = this.props;
 
     return (
       <div className={'mt-4'}>
         <h5>Placeholders</h5>
-        <table className={"table table-sm table-bordered mt-2"}>
+        <table className={'table table-sm table-bordered mt-2'}>
           <tbody>
             {placeholders.map(({ key, label }) => (
               <tr key={key}>
-                <th scope={"row"}>
+                <th scope={'row'}>
                   <pre>{key}</pre>
                 </th>
                 <td>{label}</td>

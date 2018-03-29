@@ -1,16 +1,11 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
-export const createComponentWithClassName = (className, displayName) => {
-  const ClassNameComponent = ({ children, ...restProps }) => (
+export const createComponentWithClassName = (className: string, displayName: string) => {
+  const ClassNameComponent: React.SFC<React.DOMAttributes<HTMLDivElement>> = ({ children, ...restProps }) => (
     <div className={className} {...restProps}>{children}</div>
   );
 
   ClassNameComponent.displayName = displayName;
-
-  ClassNameComponent.propTypes = {
-    children: PropTypes.node,
-  };
 
   return ClassNameComponent;
 };

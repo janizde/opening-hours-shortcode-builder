@@ -1,17 +1,16 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 import { Row, LeftCol, RightCol } from './../../UI';
-import CustomPropTypes from './../../../prop-types';
+import { IFieldConfig } from './../../../typings';
 
 import PlaceholderTable from './../PlaceholderTable';
 
-export default class FieldWrapper extends React.PureComponent<any> {
-  static propTypes = {
-    field: CustomPropTypes.fieldConfig.isRequired,
-    children: PropTypes.node,
-  };
+interface IFieldWrapperProps {
+  field: IFieldConfig<any>;
+  children?: React.ReactNode;
+}
 
+export default class FieldWrapper extends React.PureComponent<IFieldWrapperProps> {
   render() {
     const { field, children } = this.props;
 
