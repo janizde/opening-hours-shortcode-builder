@@ -14,10 +14,10 @@ const appOptionsSpec = spec.map('App options', {
 /**
  * Parses the `IAppOptions` containing the presets for the shortcode tag
  * and the predefined set definitions.
- * 
+ *
  * If the specified data is not valid according to `appOptionsSpec` the explanation
  * will be printed to the console as warning.
- * 
+ *
  * @returns         The parsed `IAppOptions` object or null if no hash was provided
  *                  or the provided data in the url is invalid
  */

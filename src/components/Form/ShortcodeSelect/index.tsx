@@ -14,7 +14,6 @@ interface IShortcodeSelectProps {
 }
 
 export default class ShortcodeSelect extends React.PureComponent<IShortcodeSelectProps> {
-
   render() {
     const { options, value, onChange } = this.props;
 
@@ -30,7 +29,9 @@ export default class ShortcodeSelect extends React.PureComponent<IShortcodeSelec
             onChange={event => onChange(event.target.value as TShortcodeType)}
           >
             {options.map(option => (
-              <option key={option.id} value={option.id}>{option.label}</option>
+              <option key={option.id} value={option.id}>
+                {option.label}
+              </option>
             ))}
           </select>
         </div>

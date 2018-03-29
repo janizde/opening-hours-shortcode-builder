@@ -28,7 +28,7 @@ import SetId from './../Fields/SetId';
 /**
  * Creates an empty shortcode model from the specified shortcode config
  * @param     config    The configuration of the shortcode for which to create the shortcode model
- * @returns             Empty model containing all available shortcode options set to `null` 
+ * @returns             Empty model containing all available shortcode options set to `null`
  */
 const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<M>>(config: C): EmptyModel<M> =>
   config.fields.map(field => field.id).reduce(
@@ -47,9 +47,10 @@ interface IFormState<M extends IShortcodeModel> {
   model: PartialModel<M>;
 }
 
-export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>
-  extends React.PureComponent<{}, IFormState<M>> {
-
+export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>> extends React.PureComponent<
+  {},
+  IFormState<M>
+> {
   constructor(props: {}) {
     super(props);
 
@@ -103,7 +104,8 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
             field={checkboxField}
             value={currentValue as boolean | null}
             onChange={value => this.handleChangeModelValue(checkboxField.id, value as any)}
-          />);
+          />
+        );
 
       case 'SELECT':
         const selectField = field as ISelectFieldConfig<M>;
@@ -140,10 +142,12 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
       <div className={'card mt-5 mb-5'}>
         <div className={'card-header'}>
           <ShortcodeSelect
-            options={Object.keys(ShortcodeConfigs).map(shortcodeKey => ShortcodeConfigs[shortcodeKey]).map(config => ({
-              id: config.id,
-              label: config.label,
-            }))}
+            options={Object.keys(ShortcodeConfigs)
+              .map(shortcodeKey => ShortcodeConfigs[shortcodeKey])
+              .map(config => ({
+                id: config.id,
+                label: config.label,
+              }))}
             value={shortcode}
             onChange={this.handleChangeShortcodeType}
           />
@@ -154,13 +158,11 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
         </div>
 
         <ul className="list-group list-group-flush">
-          {shortcodeConfig.fields
-            .filter(field => !field.show || field.show(model))
-            .map(field => (
-              <li className={'list-group-item'} key={field.id}>
-                {this.renderField(field)}
-              </li>
-            ))}
+          {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
+            <li className={'list-group-item'} key={field.id}>
+              {this.renderField(field)}
+            </li>
+          ))}
         </ul>
       </div>
     );

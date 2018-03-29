@@ -10,7 +10,6 @@ interface ICheckboxFieldProps extends IFieldProps<ICheckboxFieldConfig<any>, boo
 }
 
 export default class CheckboxField extends React.PureComponent<ICheckboxFieldProps> {
-
   render() {
     const { field, value, onChange } = this.props;
 

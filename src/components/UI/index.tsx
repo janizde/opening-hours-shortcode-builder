@@ -4,12 +4,14 @@ import * as React from 'react';
  * Creates a stateless functional react component rendering a `div` element
  * with the specified class name.
  *
- * @param       className       The default `className` string to set as the `div`'s `className` 
+ * @param       className       The default `className` string to set as the `div`'s `className`
  * @param       displayName     The SFC's `displayName`
  */
 export const createComponentWithClassName = (className: string, displayName: string) => {
   const ClassNameComponent: React.SFC<React.DOMAttributes<HTMLDivElement>> = ({ children, ...restProps }) => (
-    <div className={className} {...restProps}>{children}</div>
+    <div className={className} {...restProps}>
+      {children}
+    </div>
   );
 
   ClassNameComponent.displayName = displayName;

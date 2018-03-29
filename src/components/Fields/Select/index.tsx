@@ -10,7 +10,6 @@ interface ISelectFieldProps extends IFieldProps<ISelectFieldConfig<any>, string>
 }
 
 export default class SelectField extends React.PureComponent<ISelectFieldProps> {
-
   render() {
     const { field, value, options, onChange } = this.props;
 

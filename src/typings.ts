@@ -10,10 +10,7 @@ export interface IOption {
   label: string;
 }
 
-interface IFieldConfig<
-  M extends IShortcodeModel,
-  T extends TFieldType,
-  > {
+interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
   id: keyof M;
   label: string;
   type: T;
@@ -23,24 +20,17 @@ interface IFieldConfig<
   attributes?: {};
 }
 
-export interface ITextFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'TEXT'> {
-
+export interface ITextFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'TEXT'> {
   placeholders?: Array<IPlaceholder>;
 }
 
-export interface ISelectFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'SELECT'> {
-
+export interface ISelectFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SELECT'> {
   options?: Array<IOption>;
 }
 
-export interface ICheckboxFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'CHECKBOX'> {
-}
+export interface ICheckboxFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'CHECKBOX'> {}
 
-export interface ISetIdFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> { }
+export interface ISetIdFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> {}
 
 export type TAnyFieldConfig<M extends IShortcodeModel> =
   | ITextFieldConfig<M>
@@ -54,17 +44,9 @@ export interface IShortcodeConfig<M extends IShortcodeModel> {
   fields: Array<TAnyFieldConfig<M>>;
 }
 
-export type TFieldType =
-  | 'TEXT'
-  | 'SELECT'
-  | 'CHECKBOX'
-  | 'SET_ID';
+export type TFieldType = 'TEXT' | 'SELECT' | 'CHECKBOX' | 'SET_ID';
 
-export type TShortcodeType =
-  | 'op-is-open'
-  | 'op-overview'
-  | 'op-holidays'
-  | 'op-irregular-openings';
+export type TShortcodeType = 'op-is-open' | 'op-overview' | 'op-holidays' | 'op-irregular-openings';
 
 export interface IShortcodeModel {
   set_id: number | string;
@@ -84,10 +66,6 @@ export interface IAppOptions {
   sets: ISetMap;
 }
 
-export type EmptyModel<M extends IShortcodeModel> = {
-  [K in keyof M]: null;
-};
+export type EmptyModel<M extends IShortcodeModel> = { [K in keyof M]: null };
 
-export type PartialModel<M extends IShortcodeModel> = {
-  [K in keyof M]: M[K] | null;
-};
+export type PartialModel<M extends IShortcodeModel> = { [K in keyof M]: M[K] | null };

@@ -6,7 +6,6 @@ import { ITextFieldConfig } from './../../../typings';
 import FieldWrapper from './../FieldWrapper';
 
 export default class TextField extends React.PureComponent<IFieldProps<ITextFieldConfig<any>, string>> {
-
   render() {
     const { field, value, onChange } = this.props;
 

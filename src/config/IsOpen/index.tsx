@@ -39,14 +39,14 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       label: 'Open text',
       description: 'Text that will be shown when the selected set is currently open',
       type: FIELD_TYPES.TEXT,
-      default: 'We\'re currently open.',
+      default: "We're currently open.",
     },
     {
       id: 'closed_text',
       label: 'Closed text',
       description: 'Text that will be shown when the selected set is currently closed',
       type: FIELD_TYPES.TEXT,
-      default: 'We\'re currently closed.',
+      default: "We're currently closed.",
     },
     {
       id: 'closed_holiday_text',
@@ -110,8 +110,8 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
     },
     {
       id: 'show_today',
-      label: 'Show today\'s opening hours',
-      description: 'Specify in which cases today\'s opening hours shall be displayed in the widget',
+      label: "Show today's opening hours",
+      description: "Specify in which cases today's opening hours shall be displayed in the widget",
       type: FIELD_TYPES.SELECT,
       options: [
         {
@@ -132,7 +132,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
     {
       id: 'today_format',
       label: 'Today format',
-      description: 'Text format of today\'s opening hours',
+      description: "Text format of today's opening hours",
       type: FIELD_TYPES.TEXT,
       default: (
         <span>
