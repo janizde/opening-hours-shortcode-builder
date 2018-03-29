@@ -25,6 +25,11 @@ import Checkbox from './../Fields/Checkbox';
 import Select from './../Fields/Select';
 import SetId from './../Fields/SetId';
 
+/**
+ * Creates an empty shortcode model from the specified shortcode config
+ * @param     config    The configuration of the shortcode for which to create the shortcode model
+ * @returns             Empty model containing all available shortcode options set to `null` 
+ */
 const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<M>>(config: C): EmptyModel<M> =>
   config.fields.map(field => field.id).reduce(
     (model, fieldId) => ({
@@ -34,6 +39,7 @@ const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<
     {}
   ) as EmptyModel<M>;
 
+/** The options passed in the hash portion of the url */
 const options = parseOptions();
 
 interface IFormState<M extends IShortcodeModel> {

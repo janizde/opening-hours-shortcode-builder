@@ -2,11 +2,15 @@ import { IShortcodeConfig, IShortcodeModel, PartialModel } from '../typings';
 
 /**
  * Creates a shortcode string from the specified `shortcode` and `model`
+ * 
  * @param       shortcode       The name of the shortcode
  * @param       model           The model from which the arguments should be created
  * @returns                     A WordPress shortcode string 
  */
-export default function formatShortcode<M extends IShortcodeModel, C extends IShortcodeConfig<M>>
+export default function formatShortcode<
+  M extends IShortcodeModel,
+  C extends IShortcodeConfig<M>
+  >
   (shortcode: C['id'], model: PartialModel<M>): string {
 
   const formatValue = (value: string | boolean | number): string => {
