@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SHORTCODE_TYPES, FIELD_TYPES } from '../../config/constants';
+import { SHORTCODE_TYPES } from '../../config/constants';
 import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
 import parseOptions from './../../optionParser';
@@ -11,7 +11,11 @@ import {
   IShortcodeConfig,
   IShortcodeModel,
   TShortcodeType,
-  IFieldConfig,
+  TAnyFieldConfig,
+  ISelectFieldConfig,
+  ITextFieldConfig,
+  ICheckboxFieldConfig,
+  ISetIdFieldConfig,
 } from './../../typings';
 
 import ShortcodeSelect from './ShortcodeSelect';
@@ -69,47 +73,51 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
     }));
   }
 
-  renderField(field: IFieldConfig<M>) {
+  renderField(field: TAnyFieldConfig<M>) {
     const { model } = this.state;
 
     type TAnyModelValue = string | number | boolean | null;
     const currentValue = model[field.id] as TAnyModelValue;
 
     switch (field.type) {
-      case FIELD_TYPES.TEXT:
+      case 'TEXT':
+        const textField = field as ITextFieldConfig<M>;
         return (
           <Text
-            field={field}
+            field={textField}
             value={currentValue as string | null}
-            onChange={value => this.handleChangeModelValue(field.id, value as any)}
+            onChange={value => this.handleChangeModelValue(textField.id, value as any)}
           />
         );
 
-      case FIELD_TYPES.CHECKBOX:
+      case 'CHECKBOX':
+        const checkboxField = field as ICheckboxFieldConfig<M>;
         return (
           <Checkbox
-            field={field}
+            field={checkboxField}
             value={currentValue as boolean | null}
-            onChange={value => this.handleChangeModelValue(field.id, value as any)}
+            onChange={value => this.handleChangeModelValue(checkboxField.id, value as any)}
           />);
 
-      case FIELD_TYPES.SELECT:
+      case 'SELECT':
+        const selectField = field as ISelectFieldConfig<M>;
         return (
           <Select
-            field={field}
-            options={field.options || []}
+            field={selectField}
+            options={selectField.options || []}
             value={currentValue as string | null}
-            onChange={value => this.handleChangeModelValue(field.id, value as any)}
+            onChange={value => this.handleChangeModelValue(selectField.id, value as any)}
           />
         );
 
-      case FIELD_TYPES.SET_ID:
+      case 'SET_ID':
+        const setIdField = field as ISetIdFieldConfig<M>;
         return (
           <SetId
-            field={field}
+            field={setIdField}
             value={currentValue as string | null}
             sets={options && options.sets}
-            onChange={value => this.handleChangeModelValue(field.id, value as any)}
+            onChange={value => this.handleChangeModelValue(setIdField.id, value as any)}
           />
         );
 

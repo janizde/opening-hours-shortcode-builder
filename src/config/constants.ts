@@ -1,14 +1,10 @@
-import { TFieldType, TShortcodeType } from '../typings';
+import { TShortcodeType } from '../typings';
 
-interface IFieldTypes {
-  [key: string]: TFieldType;
-}
-
-export const FIELD_TYPES: IFieldTypes = {
-  TEXT: 'TEXT',
-  SELECT: 'SELECT',
-  CHECKBOX: 'CHECKBOX',
-  SET_ID: 'SET_ID',
+export const FIELD_TYPES = {
+  TEXT: 'TEXT' as 'TEXT',
+  SELECT: 'SELECT' as 'SELECT',
+  CHECKBOX: 'CHECKBOX' as 'CHECKBOX',
+  SET_ID: 'SET_ID' as 'SET_ID',
 };
 
 interface IShortcodeTypes {

@@ -10,22 +10,48 @@ export interface IOption {
   label: string;
 }
 
-export interface IFieldConfig<M extends IShortcodeModel> {
+interface IFieldConfig<
+  M extends IShortcodeModel,
+  T extends TFieldType,
+  > {
   id: keyof M;
   label: string;
+  type: T;
   description?: React.ReactNode;
-  type: string;
-  default?: any;
-  placeholders?: Array<IPlaceholder>;
-  options?: Array<IOption>;
+  default?: React.ReactNode;
   show?: (model: PartialModel<M>) => boolean;
-  attributes?: React.DOMAttributes<HTMLElement>;
+  attributes?: {};
 }
+
+export interface ITextFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'TEXT'> {
+
+  placeholders?: Array<IPlaceholder>;
+}
+
+export interface ISelectFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'SELECT'> {
+
+  options?: Array<IOption>;
+}
+
+export interface ICheckboxFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'CHECKBOX'> {
+}
+
+export interface ISetIdFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> { }
+
+export type TAnyFieldConfig<M extends IShortcodeModel> =
+  | ITextFieldConfig<M>
+  | ISelectFieldConfig<M>
+  | ICheckboxFieldConfig<M>
+  | ISetIdFieldConfig<M>;
 
 export interface IShortcodeConfig<M extends IShortcodeModel> {
   id: TShortcodeType;
   label: string;
-  fields: Array<IFieldConfig<M>>;
+  fields: Array<TAnyFieldConfig<M>>;
 }
 
 export type TFieldType =

@@ -1,10 +1,11 @@
 import * as React from 'react';
 
+import { ICheckboxFieldConfig } from './../../../typings';
 import { IFieldProps } from './../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-interface ICheckboxFieldProps extends IFieldProps<boolean> {
+interface ICheckboxFieldProps extends IFieldProps<ICheckboxFieldConfig<any>, boolean> {
   children?: React.ReactNode;
 }
 
