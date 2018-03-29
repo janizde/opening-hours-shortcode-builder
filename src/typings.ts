@@ -10,7 +10,7 @@ export interface IOption {
   label: string;
 }
 
-export interface IFieldConfig<M> {
+export interface IFieldConfig<M extends IShortcodeModel> {
   id: keyof M;
   label: string;
   description?: React.ReactNode;
@@ -18,11 +18,11 @@ export interface IFieldConfig<M> {
   default?: any;
   placeholders?: Array<IPlaceholder>;
   options?: Array<IOption>;
-  show?: (model: M) => boolean;
+  show?: (model: PartialModel<M>) => boolean;
   attributes?: React.DOMAttributes<HTMLElement>;
 }
 
-export interface IShortcodeConfig<M> {
+export interface IShortcodeConfig<M extends IShortcodeModel> {
   id: TShortcodeType;
   label: string;
   fields: Array<IFieldConfig<M>>;
@@ -57,3 +57,11 @@ export interface IAppOptions {
   shortcode: TShortcodeType;
   sets: ISetMap;
 }
+
+export type EmptyModel<M extends IShortcodeModel> = {
+  [K in keyof M]: null;
+};
+
+export type PartialModel<M extends IShortcodeModel> = {
+  [K in keyof M]: M[K] | null;
+};

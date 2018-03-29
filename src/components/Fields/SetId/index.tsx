@@ -6,7 +6,7 @@ import Text from './../Text';
 import Select from './../Select';
 
 interface ISetIdFieldProps extends IFieldProps {
-  sets: ISetMap;
+  sets: ISetMap | null;
 }
 
 export default class SetIdField extends React.PureComponent<ISetIdFieldProps> {

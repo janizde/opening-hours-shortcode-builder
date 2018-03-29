@@ -20,7 +20,7 @@ export default class CheckboxField extends React.PureComponent<ICheckboxFieldPro
             type="checkbox"
             className={'form-check-input'}
             id={`field-${field.id}`}
-            checked={value}
+            checked={!!value}
             onChange={event => onChange(event.target.checked)}
           />
           <label htmlFor={`field-${field.id}`} className={'form-check-label'}>

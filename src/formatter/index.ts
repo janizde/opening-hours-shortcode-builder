@@ -1,4 +1,4 @@
-import { IShortcodeConfig } from '../typings';
+import { IShortcodeConfig, IShortcodeModel, PartialModel } from '../typings';
 
 /**
  * Creates a shortcode string from the specified `shortcode` and `model`
@@ -6,7 +6,9 @@ import { IShortcodeConfig } from '../typings';
  * @param       model           The model from which the arguments should be created
  * @returns                     A WordPress shortcode string 
  */
-export default function formatShortcode<M, C extends IShortcodeConfig<M>>(shortcode: C['id'], model: M): string {
+export default function formatShortcode<M extends IShortcodeModel, C extends IShortcodeConfig<M>>
+  (shortcode: C['id'], model: PartialModel<M>): string {
+
   const formatValue = (value: string | boolean | number): string => {
     return typeof value === 'boolean' ? JSON.stringify(value) : `${value}`;
   };
