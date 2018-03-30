@@ -2,6 +2,7 @@
   "name": "op-shortcode-builder",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://janizde.github.io/opening-hours-shortcode-builder",
   "dependencies": {
     "copy-to-clipboard": "^3.0.8",
     "js.spec": "^1.0.0-23",
@@ -15,7 +16,9 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "@types/jest": "^22.2.2",
@@ -24,6 +27,7 @@
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.1.0",
     "@types/react-dom": "^16.0.4",
+    "gh-pages": "^1.1.0",
     "prettier": "^1.11.1",
     "typescript": "^2.8.1"
   }
