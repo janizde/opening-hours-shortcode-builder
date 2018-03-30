@@ -1,5 +1,8 @@
 import { TShortcodeType } from '../typings';
 
+/**
+ * Map of all avaulable field types
+ */
 export const FIELD_TYPES = {
   TEXT: 'TEXT' as 'TEXT',
   SELECT: 'SELECT' as 'SELECT',
@@ -11,6 +14,9 @@ interface IShortcodeTypes {
   [key: string]: TShortcodeType;
 }
 
+/**
+ * Map of all available shortcode types
+ */
 export const SHORTCODE_TYPES: IShortcodeTypes = {
   IS_OPEN: 'op-is-open',
   OVERVIEW: 'op-overview',

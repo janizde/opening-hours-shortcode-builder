@@ -13,6 +13,9 @@ interface IShortcodeSelectProps {
   onChange: (shortcodeType: TShortcodeType) => void;
 }
 
+/**
+ * Uncontrolled form component to select one of the available shortcode types
+ */
 export default class ShortcodeSelect extends React.PureComponent<IShortcodeSelectProps> {
   render() {
     const { options, value, onChange } = this.props;

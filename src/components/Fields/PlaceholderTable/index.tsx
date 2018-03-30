@@ -6,6 +6,9 @@ interface IPlaceholderTableProps {
   placeholders: Array<IPlaceholder>;
 }
 
+/**
+ * Table component for string template placeholders
+ */
 export default class PlaceholderTable extends React.PureComponent<IPlaceholderTableProps> {
   render() {
     const { placeholders } = this.props;

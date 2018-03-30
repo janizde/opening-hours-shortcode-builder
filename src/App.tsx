@@ -6,25 +6,21 @@ import Intro from './components/Intro';
 
 import './app.css';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <GitHubFork />
-        <div className="container mt-3">
-          <header>
-            <h1>Opening Hours Shortcode Builder </h1>
-          </header>
+const App: React.SFC<{}> = () => (
+  <div>
+    <GitHubFork />
+    <div className="container mt-3">
+      <header>
+        <h1>Opening Hours Shortcode Builder </h1>
+      </header>
 
-          <Intro />
+      <Intro />
 
-          <main>
-            <Form />
-          </main>
-        </div>
-      </div>
-    );
-  }
-}
+      <main>
+        <Form />
+      </main>
+    </div>
+  </div>
+);
 
 export default App;

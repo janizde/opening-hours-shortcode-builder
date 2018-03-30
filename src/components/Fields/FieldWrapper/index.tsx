@@ -10,6 +10,10 @@ interface IFieldWrapperProps<M extends IShortcodeModel, F extends TAnyFieldConfi
   children?: React.ReactNode;
 }
 
+/**
+ * Component wrapping an actual form field with the field's
+ * `description`, `default` value and `placeholders`
+ */
 export default class FieldWrapper<M extends IShortcodeModel, F extends TAnyFieldConfig<M>> extends React.PureComponent<
   IFieldWrapperProps<M, F>
 > {

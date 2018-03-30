@@ -5,6 +5,10 @@ interface IShortcodeDisplayProps {
   shortcode: string;
 }
 
+/**
+ * Component showing the specified `shortcode` string and
+ * offering the ability to copy `shortcode` to the clipboard using `copy-to-clipboard`
+ */
 export default class ShortcodeDisplay extends React.PureComponent<IShortcodeDisplayProps> {
   render() {
     const { shortcode } = this.props;
