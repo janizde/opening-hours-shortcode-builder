@@ -59,12 +59,12 @@ export interface ISelectFieldConfig<M extends IShortcodeModel> extends IFieldCon
 /**
  * Interface for a checkbox field
  */
-export interface ICheckboxFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'CHECKBOX'> { }
+export interface ICheckboxFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'CHECKBOX'> {}
 
 /**
  * Interface for a set id field
  */
-export interface ISetIdFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> { }
+export interface ISetIdFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> {}
 
 /**
  * Union of all available implementations of `IFieldConfig`
@@ -124,7 +124,7 @@ export interface IAppOptions {
 }
 
 /** Model object having all available shortcode attributes set to `null` */
-export type EmptyModel<M extends IShortcodeModel> = {[K in keyof M]: null };
+export type EmptyModel<M extends IShortcodeModel> = { [K in keyof M]: null };
 
 /** Model object having all available shortcode attributes set to a value or `null` */
-export type PartialModel<M extends IShortcodeModel> = {[K in keyof M]: M[K] | null };
+export type PartialModel<M extends IShortcodeModel> = { [K in keyof M]: M[K] | null };

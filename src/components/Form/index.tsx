@@ -43,7 +43,8 @@ const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<
 const options = parseOptions();
 
 interface IFormState<M extends IShortcodeModel> {
-  /** Current shortcode tag */ 
+  /** Current shortcode tag */
+
   shortcode: TShortcodeType;
   /** Current partial shortcode model */
   model: PartialModel<M>;
@@ -75,7 +76,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    * Updates `shortcode` in state according to `newType` and creates a new empty
    * model for the `model` state field based on `newType`.
    *
-   * @param     newType     The new shortcode type 
+   * @param     newType     The new shortcode type
    */
   handleChangeShortcodeType(newType: TShortcodeType) {
     this.setState(prevState => ({
@@ -87,9 +88,9 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
 
   /**
    * Handles changes to any field of the current shortcode model model
-   * 
-   * @param       key       Key of the shortcode attribute to change 
-   * @param       value     New shortcode attribute value 
+   *
+   * @param       key       Key of the shortcode attribute to change
+   * @param       value     New shortcode attribute value
    */
   handleChangeModelValue<K extends keyof M>(key: K, value: M[K]) {
     this.setState(prevState => ({
@@ -102,7 +103,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    * Renders a form field according to its `type` and populates it with
    * the current model value for that field
    *
-   * @param       field     The configuration object of the field to render 
+   * @param       field     The configuration object of the field to render
    */
   renderField(field: TAnyFieldConfig<M>) {
     const { model } = this.state;
