@@ -1,7 +1,26 @@
-import React from 'react';
-import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import * as React from 'react';
 
-export default {
+import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
+import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+
+type THighlightValue = 'nothing' | 'period' | 'day';
+
+export interface IOverviewModel extends IShortcodeModel {
+  show_closed_days: boolean;
+  show_description: boolean;
+  highlight: THighlightValue;
+  compress: true;
+  short: true;
+  include_io: true;
+  include_holidays: true;
+  caption_closed: string;
+  week_offset: number;
+  highlighted_period_class: string;
+  highlighted_day_class: string;
+  time_format: string;
+}
+
+const shortcodeConfig: IShortcodeConfig<IOverviewModel> = {
   id: SHORTCODE_TYPES.OVERVIEW,
   label: 'Overview',
   fields: [
@@ -90,13 +109,14 @@ export default {
     {
       id: 'week_offset',
       label: 'Week offset',
-      description: 'Number of weeks that the view should be shifted (positive for future weeks, negative for past weeks)',
+      description:
+        'Number of weeks that the view should be shifted (positive for future weeks, negative for past weeks)',
       default: <code>0</code>,
       type: FIELD_TYPES.TEXT,
       attributes: {
         type: 'number',
         step: 1,
-      },
+      } as any,
     },
     {
       id: 'highlighted_period_class',
@@ -155,3 +175,5 @@ export default {
     },
   ],
 };
+
+export default shortcodeConfig;

@@ -1,5 +1,11 @@
 # Opening Hours Shortcode Builder
 
+The *Opening Hours Shortcode Builder* offsers a UI for interactively building shortcodes for the [Opening Hours WordPress Plugin](https://github.com/janizde/WP-Opening-Hours).
+
+## Demo
+
+A demo can be seen at https://janizde.github.io/opening-hours-shortcode-builder/
+
 ## Options
 
 The shortcode builder can be given initial options, such as the available sets that the user can choose among.
