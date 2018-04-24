@@ -10,7 +10,7 @@ interface ISetIdFieldProps extends IFieldProps<ISetIdFieldConfig<any>, string> {
 }
 
 export default class SetIdField extends React.PureComponent<ISetIdFieldProps> {
-  componentWillMount() {
+  componentDidMount() {
     const { sets, value, onChange } = this.props;
 
     if (sets && Object.keys(sets).length > 0 && (!value || value.length < 1)) {
