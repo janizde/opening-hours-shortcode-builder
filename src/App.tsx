@@ -7,7 +7,7 @@ import Intro from './components/Intro';
 import './app.css';
 
 const App: React.SFC<{}> = () => (
-  <div>
+  <React.StrictMode>
     <GitHubFork />
     <div className="container mt-3">
       <header>
@@ -20,7 +20,7 @@ const App: React.SFC<{}> = () => (
         <Form />
       </main>
     </div>
-  </div>
+  </React.StrictMode>
 );
 
 export default App;
