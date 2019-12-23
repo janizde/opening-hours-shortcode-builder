@@ -31,13 +31,15 @@ import SetId from './../Fields/SetId';
  * @returns             Empty model containing all available shortcode options set to `null`
  */
 const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<M>>(config: C): EmptyModel<M> =>
-  config.fields.map(field => field.id).reduce(
-    (model, fieldId) => ({
-      ...model,
-      [fieldId]: null,
-    }),
-    {}
-  ) as EmptyModel<M>;
+  config.fields
+    .map(field => field.id)
+    .reduce(
+      (model, fieldId) => ({
+        ...model,
+        [fieldId]: null,
+      }),
+      {}
+    ) as EmptyModel<M>;
 
 /** The options passed in the hash portion of the url */
 const options = parseOptions();
@@ -183,11 +185,13 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
         </div>
 
         <ul className="list-group list-group-flush">
-          {shortcodeConfig.fields.filter(field => !field.show || field.show(model)).map(field => (
-            <li className={'list-group-item'} key={field.id}>
-              {this.renderField(field)}
-            </li>
-          ))}
+          {shortcodeConfig.fields
+            .filter(field => !field.show || field.show(model))
+            .map(field => (
+              <li className={'list-group-item'} key={field.id}>
+                {this.renderField(field)}
+              </li>
+            ))}
         </ul>
       </div>
     );

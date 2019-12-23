@@ -7,7 +7,7 @@ import * as React from 'react';
 export interface IPlaceholder {
   /** The placeholder for the PHP date/time format */
   key: string;
-  /** Texrual  */
+  /** Textual  */
   label: string;
 }
 
@@ -25,7 +25,7 @@ export interface IOption {
  */
 interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
   /** The field's id, corresponds to shortcode attribute name */
-  id: keyof M;
+  id: Exclude<keyof M, symbol>;
   /** The label to show with the input */
   label: string;
   /** The type if the field */
