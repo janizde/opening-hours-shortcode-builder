@@ -1,4 +1,4 @@
-# Opening Hours Shortcode Builder
+# Opening Hours Shortcode Builder 🧰 🔮 [![Build Status](https://travis-ci.com/janizde/opening-hours-shortcode-builder.svg?branch=master)](https://travis-ci.com/janizde/opening-hours-shortcode-builder)
 
 The *Opening Hours Shortcode Builder* offsers a UI for interactively building shortcodes for the [Opening Hours WordPress Plugin](https://github.com/janizde/WP-Opening-Hours).
 
