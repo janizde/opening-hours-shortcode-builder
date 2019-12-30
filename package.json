@@ -1,7 +1,8 @@
 {
   "name": "op-shortcode-builder",
-  "version": "0.2.1",
-  "private": true,
+  "version": "0.2.2",
+  "homepage": "https://janizde.github.io/opening-hours-shortcode-builder/",
+  "private": false,
   "dependencies": {
     "copy-to-clipboard": "^3.0.8",
     "js.spec": "^1.0.0-23",
