@@ -96,12 +96,19 @@ export type TFieldType = 'TEXT' | 'SELECT' | 'CHECKBOX' | 'SET_ID';
 export type TShortcodeType = 'op-is-open' | 'op-overview' | 'op-holidays' | 'op-irregular-openings';
 
 /**
- * Base interface for a shortcode model.
- * Contains all common shortcode attributes as documented in
- * @link{https://github.com/janizde/WP-Opening-Hours#common-attributes}
+ * Base interface for a shortcode model. Contains the `set_id` which is
+ * required for all shortcodes.
  */
 export interface IShortcodeModel {
   set_id: number | string;
+}
+
+/**
+ * Base interface for a model of a shortcode that has a visual representation.
+ * Contains all common shortcode attributes as documented in
+ * @link{https://github.com/janizde/WP-Opening-Hours#common-attributes}
+ */
+export interface IVisualShortcodeModel extends IShortcodeModel {
   title: string;
   before_widget: string;
   after_widget: string;

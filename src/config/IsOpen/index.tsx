@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
-import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+import { IVisualShortcodeModel, IShortcodeConfig } from '../../typings';
 
-export interface IIsOpenModel extends IShortcodeModel {
+export interface IIsOpenModel extends IVisualShortcodeModel {
   open_text: string;
   closed_text: string;
   closed_holiday_text: string;

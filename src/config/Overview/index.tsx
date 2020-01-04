@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
-import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+import { IVisualShortcodeModel, IShortcodeConfig } from '../../typings';
 
 type THighlightValue = 'nothing' | 'period' | 'day';
 
-export interface IOverviewModel extends IShortcodeModel {
+export interface IOverviewModel extends IVisualShortcodeModel {
   show_closed_days: boolean;
   show_description: boolean;
   highlight: THighlightValue;

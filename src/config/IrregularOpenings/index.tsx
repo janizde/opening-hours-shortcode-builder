@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
-import { IShortcodeModel, IShortcodeConfig } from '../../typings';
+import { IVisualShortcodeModel, IShortcodeConfig } from '../../typings';
 
-export interface IIrregularOpeningsModel extends IShortcodeModel {
+export interface IIrregularOpeningsModel extends IVisualShortcodeModel {
   highlight: boolean;
   include_past: boolean;
   date_format: string;
