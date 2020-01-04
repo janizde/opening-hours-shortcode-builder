@@ -1,7 +1,7 @@
 import { TShortcodeType } from '../typings';
 
 /**
- * Map of all avaulable field types
+ * Map of all available field types
  */
 export const FIELD_TYPES = {
   TEXT: 'TEXT' as 'TEXT',
@@ -22,4 +22,5 @@ export const SHORTCODE_TYPES: IShortcodeTypes = {
   OVERVIEW: 'op-overview',
   HOLIDAYS: 'op-holidays',
   IRREGULAR_OPENINGS: 'op-irregular-openings',
+  SCHEMA: 'op-schema',
 };
