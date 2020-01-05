@@ -27,7 +27,7 @@ interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
   /** The field's id, corresponds to shortcode attribute name */
   id: Exclude<keyof M, symbol>;
   /** The label to show with the input */
-  label: string;
+  label: React.ReactNode;
   /** The type if the field */
   type: T;
   /** The description to show with the input */
@@ -93,15 +93,22 @@ export interface IShortcodeConfig<M extends IShortcodeModel> {
 export type TFieldType = 'TEXT' | 'SELECT' | 'CHECKBOX' | 'SET_ID';
 
 /** Union of all available shortcode types */
-export type TShortcodeType = 'op-is-open' | 'op-overview' | 'op-holidays' | 'op-irregular-openings';
+export type TShortcodeType = 'op-is-open' | 'op-overview' | 'op-holidays' | 'op-irregular-openings' | 'op-schema';
 
 /**
- * Base interface for a shortcode model.
- * Contains all common shortcode attributes as documented in
- * @link{https://github.com/janizde/WP-Opening-Hours#common-attributes}
+ * Base interface for a shortcode model. Contains the `set_id` which is
+ * required for all shortcodes.
  */
 export interface IShortcodeModel {
   set_id: number | string;
+}
+
+/**
+ * Base interface for a model of a shortcode that has a visual representation.
+ * Contains all common shortcode attributes as documented in
+ * @link{https://github.com/janizde/WP-Opening-Hours#common-attributes}
+ */
+export interface IVisualShortcodeModel extends IShortcodeModel {
   title: string;
   before_widget: string;
   after_widget: string;
