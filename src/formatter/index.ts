@@ -12,7 +12,7 @@ export default function formatShortcode<M extends IShortcodeModel, C extends ISh
   model: PartialModel<M>
 ): string {
   const formatValue = (value: string | boolean | number): string => {
-    return typeof value === 'boolean' ? JSON.stringify(value) : `${value}`;
+    return typeof value === 'boolean' ? JSON.stringify(value) : `${value}`.replace(/\\([\s\S])|(")/g, "\\$1$2");
   };
 
   const argsString = Object.keys(model)
