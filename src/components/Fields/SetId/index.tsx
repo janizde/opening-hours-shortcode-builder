@@ -40,7 +40,7 @@ export default class SetIdField extends React.PureComponent<ISetIdFieldProps> {
           ...field,
           type: 'SELECT',
         }}
-        options={Object.keys(sets).map(setId => ({
+        options={Object.keys(sets).map((setId) => ({
           value: setId,
           label: sets[setId],
         }))}

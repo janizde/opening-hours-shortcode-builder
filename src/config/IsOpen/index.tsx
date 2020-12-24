@@ -100,13 +100,13 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
           label: 'The formatted end time of the next open period',
         },
       ],
-      show: model => model.show_next === true,
+      show: (model) => model.show_next === true,
     },
     {
       id: 'next_period_classes',
       label: 'Next period CSS class',
       type: FIELD_TYPES.TEXT,
-      show: model => model.show_next === true,
+      show: (model) => model.show_next === true,
     },
     {
       id: 'show_today',
@@ -153,7 +153,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
           label: 'The formatted end time of the last period',
         },
       ],
-      show: model => model.show_today !== 'never',
+      show: (model) => model.show_today !== 'never',
     },
     {
       id: 'date_format',

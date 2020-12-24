@@ -29,9 +29,9 @@ export default class ShortcodeSelect extends React.PureComponent<IShortcodeSelec
             id={'select-shortcode'}
             className={'form-control'}
             value={value}
-            onChange={event => onChange(event.target.value as TShortcodeType)}
+            onChange={(event) => onChange(event.target.value as TShortcodeType)}
           >
-            {options.map(option => (
+            {options.map((option) => (
               <option key={option.id} value={option.id}>
                 {option.label}
               </option>

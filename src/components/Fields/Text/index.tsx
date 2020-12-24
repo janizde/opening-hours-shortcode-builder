@@ -18,7 +18,7 @@ export default class TextField extends React.PureComponent<IFieldProps<ITextFiel
           {...field.attributes}
           id={`field-${field.id}`}
           value={value || ''}
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
         />
       </FieldWrapper>
     );

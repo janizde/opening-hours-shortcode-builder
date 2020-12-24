@@ -20,7 +20,7 @@ export default class SelectField extends React.PureComponent<ISelectFieldProps> 
           id={`field-${field.id}`}
           className={'form-control'}
           value={value || undefined}
-          onChange={event => onChange(event.target.value)}
+          onChange={(event) => onChange(event.target.value)}
         >
           {options.map(({ value: optionValue, label }) => (
             <option key={optionValue} value={optionValue}>

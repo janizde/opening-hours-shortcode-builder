@@ -16,7 +16,7 @@ export default function formatShortcode<M extends IShortcodeModel, C extends ISh
   };
 
   const argsString = Object.keys(model)
-    .map(modelKey => [modelKey, model[modelKey]])
+    .map((modelKey) => [modelKey, model[modelKey]])
     .filter(([key, value]) => value !== null && `${value}`.length > 0)
     .map(([key, value]) => `${key}="${formatValue(value)}"`)
     .join(' ');

@@ -32,7 +32,7 @@ import SetId from './../Fields/SetId';
  */
 const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<M>>(config: C): EmptyModel<M> =>
   config.fields
-    .map(field => field.id)
+    .map((field) => field.id)
     .reduce(
       (model, fieldId) => ({
         ...model,
@@ -81,7 +81,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    * @param     newType     The new shortcode type
    */
   handleChangeShortcodeType(newType: TShortcodeType) {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       shortcode: newType,
       model: createEmptyModel(ShortcodeConfigs[newType]),
@@ -95,7 +95,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    * @param       value     New shortcode attribute value
    */
   handleChangeModelValue<K extends keyof M>(key: K, value: M[K]) {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       model: Object.assign({}, prevState.model, { [key]: value }),
     }));
@@ -120,7 +120,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
           <Text
             field={textField}
             value={currentValue as string | null}
-            onChange={value => this.handleChangeModelValue(textField.id, value as any)}
+            onChange={(value) => this.handleChangeModelValue(textField.id, value as any)}
           />
         );
 
@@ -130,7 +130,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
           <Checkbox
             field={checkboxField}
             value={currentValue as boolean | null}
-            onChange={value => this.handleChangeModelValue(checkboxField.id, value as any)}
+            onChange={(value) => this.handleChangeModelValue(checkboxField.id, value as any)}
           />
         );
 
@@ -141,7 +141,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
             field={selectField}
             options={selectField.options || []}
             value={currentValue as string | null}
-            onChange={value => this.handleChangeModelValue(selectField.id, value as any)}
+            onChange={(value) => this.handleChangeModelValue(selectField.id, value as any)}
           />
         );
 
@@ -152,7 +152,7 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
             field={setIdField}
             value={currentValue as string | null}
             sets={options && options.sets}
-            onChange={value => this.handleChangeModelValue(setIdField.id, value as any)}
+            onChange={(value) => this.handleChangeModelValue(setIdField.id, value as any)}
           />
         );
 
@@ -170,8 +170,8 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
         <div className={'card-header'}>
           <ShortcodeSelect
             options={Object.keys(ShortcodeConfigs)
-              .map(shortcodeKey => ShortcodeConfigs[shortcodeKey])
-              .map(config => ({
+              .map((shortcodeKey) => ShortcodeConfigs[shortcodeKey])
+              .map((config) => ({
                 id: config.id,
                 label: config.label,
               }))}
@@ -186,8 +186,8 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
 
         <ul className="list-group list-group-flush">
           {shortcodeConfig.fields
-            .filter(field => !field.show || field.show(model))
-            .map(field => (
+            .filter((field) => !field.show || field.show(model))
+            .map((field) => (
               <li className={'list-group-item'} key={field.id}>
                 {this.renderField(field)}
               </li>
