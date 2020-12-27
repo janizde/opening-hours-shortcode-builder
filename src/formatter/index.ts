@@ -17,7 +17,7 @@ export default function formatShortcode<
 
   const argsString = Object.keys(model)
     .map((modelKey) => [modelKey, model[modelKey]])
-    .filter(([key, value]) => value !== null && `${value}`.length > 0)
+    .filter(([_, value]) => value !== null && `${value}`.length > 0)
     .map(([key, value]) => `${key}="${formatValue(value)}"`)
     .join(' ');
 

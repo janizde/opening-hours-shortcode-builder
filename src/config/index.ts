@@ -4,18 +4,14 @@ import Holidays from './Holidays';
 import IrregularOpenings from './IrregularOpenings';
 import Schema from './Schema';
 
-import { IShortcodeConfig } from '../typings';
+import { IShortcodeConfig, ShortcodeType } from '../typings';
 
-interface IShortcodeConfigMap {
-  [shortcodeId: string]: IShortcodeConfig<any>;
-}
-
-const shortcodeConfigMap: IShortcodeConfigMap = {
-  [IsOpen.id]: IsOpen,
-  [Overview.id]: Overview,
-  [Holidays.id]: Holidays,
-  [IrregularOpenings.id]: IrregularOpenings,
-  [Schema.id]: Schema,
+const shortcodeConfigMap: Record<ShortcodeType, IShortcodeConfig<any>> = {
+  [ShortcodeType.IsOpen]: IsOpen,
+  [ShortcodeType.Overview]: Overview,
+  [ShortcodeType.Holidays]: Holidays,
+  [ShortcodeType.IrregularOpenings]: IrregularOpenings,
+  [ShortcodeType.Schema]: Schema,
 };
 
 export default shortcodeConfigMap;

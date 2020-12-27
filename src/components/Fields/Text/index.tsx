@@ -5,24 +5,22 @@ import { ITextFieldConfig } from './../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-export default class TextField extends React.PureComponent<
-  IFieldProps<ITextFieldConfig<any>, string>
-> {
-  render() {
-    const { field, value, onChange } = this.props;
+const TextField: React.FC<IFieldProps<ITextFieldConfig<any>, string>> = ({
+  field,
+  value,
+  onChange,
+}) => (
+  <FieldWrapper field={field}>
+    <label htmlFor={`field-${field.id}`}>{field.label}</label>
+    <input
+      type={'text'}
+      className={'form-control'}
+      {...field.attributes}
+      id={`field-${field.id}`}
+      value={value || ''}
+      onChange={(event) => onChange(event.target.value)}
+    />
+  </FieldWrapper>
+);
 
-    return (
-      <FieldWrapper field={field}>
-        <label htmlFor={`field-${field.id}`}>{field.label}</label>
-        <input
-          type={'text'}
-          className={'form-control'}
-          {...field.attributes}
-          id={`field-${field.id}`}
-          value={value || ''}
-          onChange={(event) => onChange(event.target.value)}
-        />
-      </FieldWrapper>
-    );
-  }
-}
+export default TextField;

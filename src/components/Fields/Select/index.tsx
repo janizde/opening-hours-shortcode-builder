@@ -10,26 +10,27 @@ interface ISelectFieldProps
   options: Array<IOption>;
 }
 
-export default class SelectField extends React.PureComponent<ISelectFieldProps> {
-  render() {
-    const { field, value, options, onChange } = this.props;
+const SelectField: React.FC<ISelectFieldProps> = ({
+  field,
+  value,
+  options,
+  onChange,
+}) => (
+  <FieldWrapper field={field}>
+    <label htmlFor={`field-${field.id}`}>{field.label}</label>
+    <select
+      id={`field-${field.id}`}
+      className={'form-control'}
+      value={value || undefined}
+      onChange={(event) => onChange(event.target.value)}
+    >
+      {options.map(({ value: optionValue, label }) => (
+        <option key={optionValue} value={optionValue}>
+          {label}
+        </option>
+      ))}
+    </select>
+  </FieldWrapper>
+);
 
-    return (
-      <FieldWrapper field={field}>
-        <label htmlFor={`field-${field.id}`}>{field.label}</label>
-        <select
-          id={`field-${field.id}`}
-          className={'form-control'}
-          value={value || undefined}
-          onChange={(event) => onChange(event.target.value)}
-        >
-          {options.map(({ value: optionValue, label }) => (
-            <option key={optionValue} value={optionValue}>
-              {label}
-            </option>
-          ))}
-        </select>
-      </FieldWrapper>
-    );
-  }
-}
+export default SelectField;

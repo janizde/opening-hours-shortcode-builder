@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { IFieldProps } from './../../typings';
-import { ISetMap, ISetIdFieldConfig } from './../../../typings';
+import { ISetMap, ISetIdFieldConfig, FieldType } from './../../../typings';
 import Text from './../Text';
 import Select from './../Select';
 
@@ -9,42 +9,46 @@ interface ISetIdFieldProps extends IFieldProps<ISetIdFieldConfig<any>, string> {
   sets: ISetMap | null;
 }
 
-export default class SetIdField extends React.PureComponent<ISetIdFieldProps> {
-  componentDidMount() {
-    const { sets, value, onChange } = this.props;
-
-    if (sets && Object.keys(sets).length > 0 && (!value || value.length < 1)) {
-      onChange(Object.keys(sets)[0]);
+const SetIdField: React.FC<ISetIdFieldProps> = ({
+  sets,
+  field,
+  ...restProps
+}) => {
+  React.useEffect(() => {
+    if (
+      sets &&
+      Object.keys(sets).length > 0 &&
+      (!restProps.value || restProps.value.length < 1)
+    ) {
+      restProps.onChange(Object.keys(sets)[0]);
     }
-  }
+  });
 
-  render() {
-    const { sets, field, ...restProps } = this.props;
-
-    if (!sets) {
-      return (
-        <Text
-          {...restProps}
-          field={{
-            ...field,
-            type: 'TEXT',
-          }}
-        />
-      );
-    }
-
+  if (!sets) {
     return (
-      <Select
+      <Text
         {...restProps}
         field={{
           ...field,
-          type: 'SELECT',
+          type: FieldType.Text,
         }}
-        options={Object.keys(sets).map((setId) => ({
-          value: setId,
-          label: sets[setId],
-        }))}
       />
     );
   }
-}
+
+  return (
+    <Select
+      {...restProps}
+      field={{
+        ...field,
+        type: FieldType.Select,
+      }}
+      options={Object.keys(sets).map((setId) => ({
+        value: setId,
+        label: sets[setId],
+      }))}
+    />
+  );
+};
+
+export default SetIdField;

@@ -1,7 +1,11 @@
 import * as React from 'react';
 
-import { FIELD_TYPES, SHORTCODE_TYPES } from '../constants';
-import { IVisualShortcodeModel, IShortcodeConfig } from '../../typings';
+import {
+  IVisualShortcodeModel,
+  IShortcodeConfig,
+  ShortcodeType,
+  FieldType,
+} from '../../typings';
 
 export interface IIsOpenModel extends IVisualShortcodeModel {
   open_text: string;
@@ -19,14 +23,14 @@ export interface IIsOpenModel extends IVisualShortcodeModel {
 }
 
 const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
-  id: SHORTCODE_TYPES.IS_OPEN,
+  id: ShortcodeType.IsOpen,
   label: 'Is Open',
   fields: [
     {
       id: 'set_id',
       label: 'Set ID',
       description: 'ID of the set for which this shortcode should be used',
-      type: FIELD_TYPES.SET_ID,
+      type: FieldType.SetId,
       attributes: {
         required: true,
       },
@@ -35,14 +39,14 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       id: 'title',
       label: 'Title',
       description: 'Shortcode header title',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
     },
     {
       id: 'open_text',
       label: 'Open text',
       description:
         'Text that will be shown when the selected set is currently open',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: `We're currently open.`,
     },
     {
@@ -50,7 +54,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       label: 'Closed text',
       description:
         'Text that will be shown when the selected set is currently closed',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: `We're currently closed.`,
     },
     {
@@ -58,7 +62,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       label: 'Closed holiday text',
       description:
         'Text that will be shown when the selected set is currently closed due to a holiday',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: (
         <span>
           We're currently closed for <code>%1$s</code>.
@@ -76,14 +80,14 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       id: 'show_next',
       label: 'Show next open period',
       description: 'Whether to show the next open period when closed or not',
-      type: FIELD_TYPES.CHECKBOX,
+      type: FieldType.Checkbox,
       default: 'Disabled',
     },
     {
       id: 'next_format',
       label: 'Next format',
       description: 'Text format of next open period.',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: (
         <span>
           We're open again on <code>%2$s</code> (<code>%1$s</code>) from{' '}
@@ -113,14 +117,14 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
     {
       id: 'next_period_classes',
       label: 'Next period CSS class',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       show: (model) => model.show_next === true,
     },
     {
       id: 'show_today',
       label: `Show today's opening hours`,
       description: `Specify in which cases today's opening hours shall be displayed in the widget`,
-      type: FIELD_TYPES.SELECT,
+      type: FieldType.Select,
       options: [
         {
           value: 'never',
@@ -141,7 +145,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       id: 'today_format',
       label: 'Today format',
       description: `Text format of today's opening hours`,
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: (
         <span>
           Opening Hours today: <code>%1$s</code>
@@ -178,7 +182,7 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
           </a>
         </span>
       ),
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: 'WordPress setting',
     },
     {
@@ -198,47 +202,47 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
           </a>
         </span>
       ),
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: 'WordPress setting',
     },
     {
       id: 'open_class',
       label: 'CSS class when open',
       default: <code>op-open</code>,
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
     },
     {
       id: 'closed_class',
       label: 'CSS class when closed',
       default: <code>op-closed</code>,
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
     },
     {
       id: 'before_widget',
       label: 'Before widget',
       description: 'HTML markup before widget',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: <code>{'<div class="op-is-open-shortcode">'}</code>,
     },
     {
       id: 'after_widget',
       label: 'After widget',
       description: 'HTML markup after widget',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: <code>{'</div>'}</code>,
     },
     {
       id: 'before_title',
       label: 'Before title',
       description: 'HTML markup before title',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: <code>{'<h3 class="op-is-open-title">'}</code>,
     },
     {
       id: 'after_title',
       label: 'After title',
       description: 'HTML markup after title',
-      type: FIELD_TYPES.TEXT,
+      type: FieldType.Text,
       default: <code>{'</h3>'}</code>,
     },
   ],

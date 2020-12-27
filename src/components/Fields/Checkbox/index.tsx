@@ -6,32 +6,30 @@ import { IFieldProps } from './../../typings';
 import FieldWrapper from './../FieldWrapper';
 
 interface ICheckboxFieldProps
-  extends IFieldProps<ICheckboxFieldConfig<any>, boolean> {
-  children?: React.ReactNode;
-}
+  extends IFieldProps<ICheckboxFieldConfig<any>, boolean> {}
 
 /**
  * Controlled checkbox form component
  */
-export default class CheckboxField extends React.PureComponent<ICheckboxFieldProps> {
-  render() {
-    const { field, value, onChange } = this.props;
+const CheckboxField: React.FC<ICheckboxFieldProps> = ({
+  value,
+  field,
+  onChange,
+}) => (
+  <FieldWrapper field={field}>
+    <div className={'form-check'}>
+      <input
+        type="checkbox"
+        className={'form-check-input'}
+        id={`field-${field.id}`}
+        checked={!!value}
+        onChange={(event) => onChange(event.target.checked)}
+      />
+      <label htmlFor={`field-${field.id}`} className={'form-check-label'}>
+        {field.label}
+      </label>
+    </div>
+  </FieldWrapper>
+);
 
-    return (
-      <FieldWrapper field={field}>
-        <div className={'form-check'}>
-          <input
-            type="checkbox"
-            className={'form-check-input'}
-            id={`field-${field.id}`}
-            checked={!!value}
-            onChange={(event) => onChange(event.target.checked)}
-          />
-          <label htmlFor={`field-${field.id}`} className={'form-check-label'}>
-            {field.label}
-          </label>
-        </div>
-      </FieldWrapper>
-    );
-  }
-}
+export default CheckboxField;

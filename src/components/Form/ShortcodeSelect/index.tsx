@@ -1,44 +1,44 @@
 import * as React from 'react';
 
-import { TShortcodeType } from './../../../typings';
+import { ShortcodeType } from './../../../typings';
 
 interface IShortcodeOption {
-  id: TShortcodeType;
+  id: ShortcodeType;
   label: string;
 }
 
 interface IShortcodeSelectProps {
   options: Array<IShortcodeOption>;
-  value: TShortcodeType;
-  onChange: (shortcodeType: TShortcodeType) => void;
+  value: ShortcodeType;
+  onChange: (shortcodeType: ShortcodeType) => void;
 }
 
 /**
  * Uncontrolled form component to select one of the available shortcode types
  */
-export default class ShortcodeSelect extends React.PureComponent<IShortcodeSelectProps> {
-  render() {
-    const { options, value, onChange } = this.props;
+const ShortcodeSelect: React.FC<IShortcodeSelectProps> = ({
+  options,
+  value,
+  onChange,
+}) => (
+  <div className={'form-inline'}>
+    <div className={'form-group'}>
+      <label htmlFor={'select-shortcode'}>Select Shortcode</label>
+      &nbsp;&nbsp;
+      <select
+        id={'select-shortcode'}
+        className={'form-control'}
+        value={value}
+        onChange={(event) => onChange(event.target.value as ShortcodeType)}
+      >
+        {options.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  </div>
+);
 
-    return (
-      <div className={'form-inline'}>
-        <div className={'form-group'}>
-          <label htmlFor={'select-shortcode'}>Select Shortcode</label>
-          &nbsp;&nbsp;
-          <select
-            id={'select-shortcode'}
-            className={'form-control'}
-            value={value}
-            onChange={(event) => onChange(event.target.value as TShortcodeType)}
-          >
-            {options.map((option) => (
-              <option key={option.id} value={option.id}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-    );
-  }
-}
+export default ShortcodeSelect;

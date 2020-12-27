@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { SHORTCODE_TYPES } from '../../config/constants';
 import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
 import parseOptions from './../../optionParser';
@@ -9,12 +8,13 @@ import {
   EmptyModel,
   IShortcodeConfig,
   IShortcodeModel,
-  TShortcodeType,
+  ShortcodeType,
   TAnyFieldConfig,
   ISelectFieldConfig,
   ITextFieldConfig,
   ICheckboxFieldConfig,
   ISetIdFieldConfig,
+  FieldType,
 } from './../../typings';
 
 import ShortcodeSelect from './ShortcodeSelect';
@@ -53,7 +53,7 @@ const options = parseOptions();
  */
 function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
   const [shortcode, setShortcode] = React.useState(
-    options && options.shortcode ? options.shortcode : SHORTCODE_TYPES.OVERVIEW
+    options && options.shortcode ? options.shortcode : ShortcodeType.Overview
   );
   const [model, setModel] = React.useState(
     createEmptyModel(ShortcodeConfigs[shortcode])
@@ -68,7 +68,7 @@ function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
    *
    * @param     newType     The new shortcode type
    */
-  const handleChangeShortcodeType = (nextShortcode: TShortcodeType) => {
+  const handleChangeShortcodeType = (nextShortcode: ShortcodeType) => {
     setShortcode(nextShortcode);
     setModel(createEmptyModel(ShortcodeConfigs[nextShortcode]));
   };
@@ -144,7 +144,7 @@ function Field<M extends IShortcodeModel>({
   handleChangeValue,
 }: IFieldProps<M>) {
   switch (config.type) {
-    case 'TEXT':
+    case FieldType.Text:
       const textField = config as ITextFieldConfig<M>;
       return (
         <Text
@@ -156,7 +156,7 @@ function Field<M extends IShortcodeModel>({
         />
       );
 
-    case 'CHECKBOX':
+    case FieldType.Checkbox:
       const checkboxField = config as ICheckboxFieldConfig<M>;
       return (
         <Checkbox
@@ -168,7 +168,7 @@ function Field<M extends IShortcodeModel>({
         />
       );
 
-    case 'SELECT':
+    case FieldType.Select:
       const selectField = config as ISelectFieldConfig<M>;
       return (
         <Select
@@ -181,7 +181,7 @@ function Field<M extends IShortcodeModel>({
         />
       );
 
-    case 'SET_ID':
+    case FieldType.SetId:
       const setIdField = config as ISetIdFieldConfig<M>;
       return (
         <SetId

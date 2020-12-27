@@ -1,15 +1,11 @@
 import { spec, symbol, valid, explainStr } from 'js.spec';
 
-import { SHORTCODE_TYPES } from '../config/constants';
-import { IAppOptions } from '../typings';
+import { IAppOptions, shortcodeTypes } from '../typings';
 
 /** JS.spec defintition to validate `IAppOptions` at runtime */
 const appOptionsSpec = spec.map('App options', {
   [symbol.optional]: {
-    shortcode: spec.oneOf(
-      'shortcode tag',
-      ...Object.keys(SHORTCODE_TYPES).map((key) => SHORTCODE_TYPES[key])
-    ),
+    shortcode: spec.oneOf('shortcode tag', shortcodeTypes),
     sets: spec.map('sets', {}),
   },
 });

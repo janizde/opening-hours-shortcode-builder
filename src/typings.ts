@@ -23,13 +23,13 @@ export interface IOption {
  * Base interface for an options field.
  * When you want to refer to a value as "one of the available field types" use the type `TAnyFieldConfig` instead.
  */
-interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
+interface IFieldConfig<M extends IShortcodeModel> {
   /** The field's id, corresponds to shortcode attribute name */
   id: Exclude<keyof M, symbol>;
   /** The label to show with the input */
   label: React.ReactNode;
   /** The type of the field */
-  type: T;
+  type: FieldType;
   /** The description to show with the input */
   description?: React.ReactNode;
   /** Readable representation of the default value */
@@ -44,7 +44,7 @@ interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
  * Interface for a text field
  */
 export interface ITextFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'TEXT'> {
+  extends IFieldConfig<M> {
   /** Definition of available string format placeholders */
   placeholders?: Array<IPlaceholder>;
 }
@@ -53,7 +53,7 @@ export interface ITextFieldConfig<M extends IShortcodeModel>
  * Interface for a select field
  */
 export interface ISelectFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'SELECT'> {
+  extends IFieldConfig<M> {
   /** Available options for the select menu */
   options?: Array<IOption>;
 }
@@ -62,13 +62,13 @@ export interface ISelectFieldConfig<M extends IShortcodeModel>
  * Interface for a checkbox field
  */
 export interface ICheckboxFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'CHECKBOX'> {}
+  extends IFieldConfig<M> {}
 
 /**
  * Interface for a set id field
  */
 export interface ISetIdFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> {}
+  extends IFieldConfig<M> {}
 
 /**
  * Union of all available implementations of `IFieldConfig`
@@ -86,23 +86,35 @@ export type TAnyFieldConfig<M extends IShortcodeModel> =
  */
 export interface IShortcodeConfig<M extends IShortcodeModel> {
   /** The shortcode tag */
-  id: TShortcodeType;
+  id: ShortcodeType;
   /** The readable name to show in the `ShortcodeSelect` */
   label: string;
   /** Field configurations of all available shortcode attributes */
   fields: Array<TAnyFieldConfig<M>>;
 }
 
-/** Union of all available field types */
-export type TFieldType = 'TEXT' | 'SELECT' | 'CHECKBOX' | 'SET_ID';
+export enum FieldType {
+  Text = 'TEXT',
+  Select = 'SELECT',
+  Checkbox = 'CHECKBOX',
+  SetId = 'SET_ID',
+}
 
-/** Union of all available shortcode types */
-export type TShortcodeType =
-  | 'op-is-open'
-  | 'op-overview'
-  | 'op-holidays'
-  | 'op-irregular-openings'
-  | 'op-schema';
+export enum ShortcodeType {
+  IsOpen = 'op-is-open',
+  Overview = 'op-overview',
+  IrregularOpenings = 'op-irregular-openings',
+  Holidays = 'op-holidays',
+  Schema = 'op-schema',
+}
+
+export const shortcodeTypes: ShortcodeType[] = [
+  ShortcodeType.IsOpen,
+  ShortcodeType.Overview,
+  ShortcodeType.IrregularOpenings,
+  ShortcodeType.Holidays,
+  ShortcodeType.Schema,
+];
 
 /**
  * Base interface for a shortcode model. Contains the `set_id` which is
@@ -135,7 +147,7 @@ export interface ISetMap {
  * to the as base64 encoded JSON string in the hash portion of the url
  */
 export interface IAppOptions {
-  shortcode: TShortcodeType;
+  shortcode: ShortcodeType;
   sets: ISetMap;
 }
 

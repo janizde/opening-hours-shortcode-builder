@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const GitHubFork: React.SFC<any> = () => (
+const GitHubFork: React.FC = () => (
   <a href="https://github.com/janizde/opening-hours-shortcode-builder">
     <img
       className={'github-fork'}

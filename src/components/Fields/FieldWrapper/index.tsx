@@ -5,6 +5,7 @@ import {
   TAnyFieldConfig,
   IShortcodeModel,
   ITextFieldConfig,
+  FieldType,
 } from './../../../typings';
 
 import PlaceholderTable from './../PlaceholderTable';
@@ -21,44 +22,36 @@ interface IFieldWrapperProps<
  * Component wrapping an actual form field with the field's
  * `description`, `default` value and `placeholders`
  */
-export default class FieldWrapper<
-  M extends IShortcodeModel,
-  F extends TAnyFieldConfig<M>
-> extends React.PureComponent<IFieldWrapperProps<M, F>> {
-  renderPlaceholderTable(field: TAnyFieldConfig<M>) {
-    if (field.type !== 'TEXT') {
-      return null;
-    }
+function FieldWrapper<M extends IShortcodeModel, F extends TAnyFieldConfig<M>>({
+  children,
+  field,
+}: IFieldWrapperProps<M, F>) {
+  return (
+    <Row>
+      <LeftCol>
+        {children}
 
-    const textField = field as ITextFieldConfig<M>;
-    return textField.placeholders ? (
-      <PlaceholderTable placeholders={textField.placeholders} />
-    ) : null;
-  }
+        {field.description && (
+          <span className={'form-text text-muted'}>{field.description}</span>
+        )}
+      </LeftCol>
+      <RightCol>
+        {field.default && (
+          <span>
+            <span className={'badge badge-primary'}>Default</span>{' '}
+            {field.default}
+          </span>
+        )}
 
-  render() {
-    const { field, children } = this.props;
-
-    return (
-      <Row>
-        <LeftCol>
-          {children}
-
-          {field.description && (
-            <span className={'form-text text-muted'}>{field.description}</span>
+        {field.type === FieldType.Text &&
+          (field as ITextFieldConfig<M>).placeholders && (
+            <PlaceholderTable
+              placeholders={(field as ITextFieldConfig<M>).placeholders!}
+            />
           )}
-        </LeftCol>
-        <RightCol>
-          {field.default && (
-            <span>
-              <span className={'badge badge-primary'}>Default</span>{' '}
-              {field.default}
-            </span>
-          )}
-
-          {this.renderPlaceholderTable(field)}
-        </RightCol>
-      </Row>
-    );
-  }
+      </RightCol>
+    </Row>
+  );
 }
+
+export default FieldWrapper;
