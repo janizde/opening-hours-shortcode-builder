@@ -25,11 +25,9 @@ export interface IOption {
  */
 interface IFieldConfig<M extends IShortcodeModel> {
   /** The field's id, corresponds to shortcode attribute name */
-  id: Exclude<keyof M, symbol>;
+  id: string;
   /** The label to show with the input */
   label: React.ReactNode;
-  /** The type of the field */
-  type: FieldType;
   /** The description to show with the input */
   description?: React.ReactNode;
   /** Readable representation of the default value */
@@ -45,6 +43,7 @@ interface IFieldConfig<M extends IShortcodeModel> {
  */
 export interface ITextFieldConfig<M extends IShortcodeModel>
   extends IFieldConfig<M> {
+  type: FieldType.Text;
   /** Definition of available string format placeholders */
   placeholders?: Array<IPlaceholder>;
 }
@@ -54,6 +53,7 @@ export interface ITextFieldConfig<M extends IShortcodeModel>
  */
 export interface ISelectFieldConfig<M extends IShortcodeModel>
   extends IFieldConfig<M> {
+  type: FieldType.Select;
   /** Available options for the select menu */
   options?: Array<IOption>;
 }
@@ -62,13 +62,17 @@ export interface ISelectFieldConfig<M extends IShortcodeModel>
  * Interface for a checkbox field
  */
 export interface ICheckboxFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M> {}
+  extends IFieldConfig<M> {
+  type: FieldType.Checkbox;
+}
 
 /**
  * Interface for a set id field
  */
 export interface ISetIdFieldConfig<M extends IShortcodeModel>
-  extends IFieldConfig<M> {}
+  extends IFieldConfig<M> {
+  type: FieldType.SetId;
+}
 
 /**
  * Union of all available implementations of `IFieldConfig`

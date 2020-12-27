@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useFormik } from 'formik';
 
 import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
@@ -10,10 +11,6 @@ import {
   IShortcodeModel,
   ShortcodeType,
   TAnyFieldConfig,
-  ISelectFieldConfig,
-  ITextFieldConfig,
-  ICheckboxFieldConfig,
-  ISetIdFieldConfig,
   FieldType,
 } from './../../typings';
 
@@ -40,7 +37,7 @@ const createEmptyModel = <
     .reduce(
       (model, fieldId) => ({
         ...model,
-        [fieldId]: null,
+        [fieldId]: '',
       }),
       {}
     ) as EmptyModel<M>;
@@ -94,42 +91,31 @@ const FormContainer: React.FC = () => {
 export default FormContainer;
 
 const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
-  const [model, setModel] = React.useState(
-    createEmptyModel(ShortcodeConfigs[shortcode])
-  );
+  const { values, handleChange, handleBlur } = useFormik({
+    initialValues: createEmptyModel(ShortcodeConfigs[shortcode]),
+    onSubmit: () => undefined,
+  });
 
   const shortcodeConfig = ShortcodeConfigs[shortcode];
-
-  /**
-   * Handles changes to any field of the current shortcode model model
-   *
-   * @param       key       Key of the shortcode attribute to change
-   * @param       value     New shortcode attribute value
-   */
-  const handleChangeModelValue = (
-    key: string | number | symbol,
-    value: TAnyModelValue
-  ) => {
-    setModel((prevModel) => ({ ...prevModel, [key]: value }));
-  };
 
   return (
     <>
       <div className={'card-body'}>
         <ShortcodeDisplay
-          shortcode={formatShortcode(shortcodeConfig.id, model)}
+          shortcode={formatShortcode(shortcodeConfig.id, values)}
         />
       </div>
 
       <ul className="list-group list-group-flush">
         {shortcodeConfig.fields
-          .filter((field) => !field.show || field.show(model))
+          .filter((field) => !field.show || field.show(values))
           .map((field) => (
             <li className={'list-group-item'} key={field.id}>
               <Field
                 config={field}
-                value={model[field.id]}
-                handleChangeValue={handleChangeModelValue}
+                value={values[field.id]}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
             </li>
           ))}
@@ -138,12 +124,11 @@ const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
   );
 };
 
-type TAnyModelValue = string | number | boolean | null;
-
 interface IFieldProps<M extends IShortcodeModel> {
   config: TAnyFieldConfig<M>;
-  value: TAnyModelValue;
-  handleChangeValue: <K extends keyof M>(key: K, value: M[K]) => void;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLElement>;
+  onBlur: React.FocusEventHandler<HTMLElement>;
 }
 
 /**
@@ -152,58 +137,23 @@ interface IFieldProps<M extends IShortcodeModel> {
  */
 function Field<M extends IShortcodeModel>({
   config,
-  value,
-  handleChangeValue,
+  ...restProps
 }: IFieldProps<M>) {
   switch (config.type) {
     case FieldType.Text:
-      const textField = config as ITextFieldConfig<M>;
-      return (
-        <Text
-          field={textField}
-          value={value as string | null}
-          onChange={(nextValue) =>
-            handleChangeValue(textField.id, nextValue as any)
-          }
-        />
-      );
+      return <Text field={config} {...restProps} />;
 
     case FieldType.Checkbox:
-      const checkboxField = config as ICheckboxFieldConfig<M>;
-      return (
-        <Checkbox
-          field={checkboxField}
-          value={value as boolean | null}
-          onChange={(nextValue) =>
-            handleChangeValue(checkboxField.id, nextValue as any)
-          }
-        />
-      );
+      return <Checkbox field={config} {...restProps} />;
 
     case FieldType.Select:
-      const selectField = config as ISelectFieldConfig<M>;
       return (
-        <Select
-          field={selectField}
-          options={selectField.options || []}
-          value={value as string | null}
-          onChange={(nextValue) =>
-            handleChangeValue(selectField.id, nextValue as any)
-          }
-        />
+        <Select field={config} options={config.options || []} {...restProps} />
       );
 
     case FieldType.SetId:
-      const setIdField = config as ISetIdFieldConfig<M>;
       return (
-        <SetId
-          field={setIdField}
-          value={value as string | null}
-          sets={options && options.sets}
-          onChange={(nextValue) =>
-            handleChangeValue(setIdField.id, nextValue as any)
-          }
-        />
+        <SetId field={config} sets={options && options.sets} {...restProps} />
       );
 
     default:

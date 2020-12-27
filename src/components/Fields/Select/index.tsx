@@ -5,24 +5,22 @@ import { IOption, ISelectFieldConfig } from '../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-interface ISelectFieldProps
-  extends IFieldProps<ISelectFieldConfig<any>, string> {
+interface ISelectFieldProps extends IFieldProps<ISelectFieldConfig<any>> {
   options: Array<IOption>;
 }
 
 const SelectField: React.FC<ISelectFieldProps> = ({
   field,
-  value,
   options,
-  onChange,
+  ...restProps
 }) => (
   <FieldWrapper field={field}>
     <label htmlFor={`field-${field.id}`}>{field.label}</label>
     <select
       id={`field-${field.id}`}
+      name={field.id}
       className={'form-control'}
-      value={value || undefined}
-      onChange={(event) => onChange(event.target.value)}
+      {...restProps}
     >
       {options.map(({ value: optionValue, label }) => (
         <option key={optionValue} value={optionValue}>

@@ -5,10 +5,9 @@ import { ITextFieldConfig } from './../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-const TextField: React.FC<IFieldProps<ITextFieldConfig<any>, string>> = ({
+const TextField: React.FC<IFieldProps<ITextFieldConfig<any>>> = ({
   field,
-  value,
-  onChange,
+  ...restProps
 }) => (
   <FieldWrapper field={field}>
     <label htmlFor={`field-${field.id}`}>{field.label}</label>
@@ -17,8 +16,8 @@ const TextField: React.FC<IFieldProps<ITextFieldConfig<any>, string>> = ({
       className={'form-control'}
       {...field.attributes}
       id={`field-${field.id}`}
-      value={value || ''}
-      onChange={(event) => onChange(event.target.value)}
+      name={field.id}
+      {...restProps}
     />
   </FieldWrapper>
 );

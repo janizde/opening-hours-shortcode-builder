@@ -5,16 +5,14 @@ import { IFieldProps } from './../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-interface ICheckboxFieldProps
-  extends IFieldProps<ICheckboxFieldConfig<any>, boolean> {}
+interface ICheckboxFieldProps extends IFieldProps<ICheckboxFieldConfig<any>> {}
 
 /**
  * Controlled checkbox form component
  */
 const CheckboxField: React.FC<ICheckboxFieldProps> = ({
-  value,
   field,
-  onChange,
+  ...restProps
 }) => (
   <FieldWrapper field={field}>
     <div className={'form-check'}>
@@ -22,8 +20,8 @@ const CheckboxField: React.FC<ICheckboxFieldProps> = ({
         type="checkbox"
         className={'form-check-input'}
         id={`field-${field.id}`}
-        checked={!!value}
-        onChange={(event) => onChange(event.target.checked)}
+        name={field.id}
+        {...restProps}
       />
       <label htmlFor={`field-${field.id}`} className={'form-check-label'}>
         {field.label}

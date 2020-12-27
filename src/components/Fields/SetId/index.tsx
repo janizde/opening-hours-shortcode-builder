@@ -5,7 +5,7 @@ import { ISetMap, ISetIdFieldConfig, FieldType } from './../../../typings';
 import Text from './../Text';
 import Select from './../Select';
 
-interface ISetIdFieldProps extends IFieldProps<ISetIdFieldConfig<any>, string> {
+interface ISetIdFieldProps extends IFieldProps<ISetIdFieldConfig<any>> {
   sets: ISetMap | null;
 }
 
@@ -14,16 +14,6 @@ const SetIdField: React.FC<ISetIdFieldProps> = ({
   field,
   ...restProps
 }) => {
-  React.useEffect(() => {
-    if (
-      sets &&
-      Object.keys(sets).length > 0 &&
-      (!restProps.value || restProps.value.length < 1)
-    ) {
-      restProps.onChange(Object.keys(sets)[0]);
-    }
-  });
-
   if (!sets) {
     return (
       <Text
