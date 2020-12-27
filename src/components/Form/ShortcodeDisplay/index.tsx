@@ -19,12 +19,22 @@ export default class ShortcodeDisplay extends React.PureComponent<IShortcodeDisp
     return (
       <div className="form-group">
         <label htmlFor="textarea-display">Shortcode</label>
-        <textarea readOnly={true} value={shortcode} className={'form-control font-mono'} />
-        <button className={'btn btn-sm btn-secondary mt-2'} onClick={() => copy(shortcode)}>
+        <textarea
+          readOnly={true}
+          value={shortcode}
+          className={'form-control font-mono'}
+        />
+        <button
+          className={'btn btn-sm btn-secondary mt-2'}
+          onClick={() => copy(shortcode)}
+        >
           Copy to clipboard
         </button>
         {hasClose && (
-          <button className={'btn btn-sm btn-light mt-2 ml-2'} onClick={() => window.close()}>
+          <button
+            className={'btn btn-sm btn-light mt-2 ml-2'}
+            onClick={() => window.close()}
+          >
             Close
           </button>
         )}

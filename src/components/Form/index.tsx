@@ -150,7 +150,9 @@ function Field<M extends IShortcodeModel>({
         <Text
           field={textField}
           value={value as string | null}
-          onChange={(nextValue) => handleChangeValue(textField.id, nextValue as any)}
+          onChange={(nextValue) =>
+            handleChangeValue(textField.id, nextValue as any)
+          }
         />
       );
 
@@ -173,7 +175,9 @@ function Field<M extends IShortcodeModel>({
           field={selectField}
           options={selectField.options || []}
           value={value as string | null}
-          onChange={(nextValue) => handleChangeValue(selectField.id, nextValue as any)}
+          onChange={(nextValue) =>
+            handleChangeValue(selectField.id, nextValue as any)
+          }
         />
       );
 
@@ -184,7 +188,9 @@ function Field<M extends IShortcodeModel>({
           field={setIdField}
           value={value as string | null}
           sets={options && options.sets}
-          onChange={(nextValue) => handleChangeValue(setIdField.id, nextValue as any)}
+          onChange={(nextValue) =>
+            handleChangeValue(setIdField.id, nextValue as any)
+          }
         />
       );
 

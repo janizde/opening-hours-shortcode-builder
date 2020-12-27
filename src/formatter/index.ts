@@ -7,10 +7,10 @@ import { IShortcodeConfig, IShortcodeModel, PartialModel } from '../typings';
  * @param       model           The model from which the arguments should be created
  * @returns                     A WordPress shortcode string
  */
-export default function formatShortcode<M extends IShortcodeModel, C extends IShortcodeConfig<M>>(
-  shortcode: C['id'],
-  model: PartialModel<M>
-): string {
+export default function formatShortcode<
+  M extends IShortcodeModel,
+  C extends IShortcodeConfig<M>
+>(shortcode: C['id'], model: PartialModel<M>): string {
   const formatValue = (value: string | boolean | number): string => {
     return typeof value === 'boolean' ? JSON.stringify(value) : `${value}`;
   };
@@ -21,5 +21,7 @@ export default function formatShortcode<M extends IShortcodeModel, C extends ISh
     .map(([key, value]) => `${key}="${formatValue(value)}"`)
     .join(' ');
 
-  return argsString.length > 0 ? `[${shortcode} ${argsString}]` : `[${shortcode}]`;
+  return argsString.length > 0
+    ? `[${shortcode} ${argsString}]`
+    : `[${shortcode}]`;
 }

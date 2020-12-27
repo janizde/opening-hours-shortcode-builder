@@ -34,7 +34,8 @@ const shortcodeConfig: IShortcodeConfig<ISchemaModel> = {
     {
       id: 'exclude_irregular_openings',
       label: 'Exclude Irregular Openings',
-      description: 'Whether to exclude irregular openings from the specification',
+      description:
+        'Whether to exclude irregular openings from the specification',
       default: 'Disabled',
       type: FIELD_TYPES.CHECKBOX,
     },

@@ -40,21 +40,24 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
     {
       id: 'open_text',
       label: 'Open text',
-      description: 'Text that will be shown when the selected set is currently open',
+      description:
+        'Text that will be shown when the selected set is currently open',
       type: FIELD_TYPES.TEXT,
       default: `We're currently open.`,
     },
     {
       id: 'closed_text',
       label: 'Closed text',
-      description: 'Text that will be shown when the selected set is currently closed',
+      description:
+        'Text that will be shown when the selected set is currently closed',
       type: FIELD_TYPES.TEXT,
       default: `We're currently closed.`,
     },
     {
       id: 'closed_holiday_text',
       label: 'Closed holiday text',
-      description: 'Text that will be shown when the selected set is currently closed due to a holiday',
+      description:
+        'Text that will be shown when the selected set is currently closed due to a holiday',
       type: FIELD_TYPES.TEXT,
       default: (
         <span>
@@ -64,7 +67,8 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       placeholders: [
         {
           key: '%1$s',
-          label: 'The name of the holiday due to which the set is currently closed',
+          label:
+            'The name of the holiday due to which the set is currently closed',
         },
       ],
     },
@@ -82,7 +86,8 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       type: FIELD_TYPES.TEXT,
       default: (
         <span>
-          We're open again on <code>%2$s</code> (<code>%1$s</code>) from <code>%3$s</code> to <code>%4$s</code>
+          We're open again on <code>%2$s</code> (<code>%1$s</code>) from{' '}
+          <code>%3$s</code> to <code>%4$s</code>
         </span>
       ),
       placeholders: [
@@ -165,7 +170,10 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
         <span>
           <span>PHP date format for the date of the next open period.</span>
           &nbsp;
-          <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
+          <a
+            href={'http://php.net/manual/en/function.date.php'}
+            target={'_blank'}
+          >
             More on PHP date and time formats
           </a>
         </span>
@@ -178,9 +186,14 @@ const shortcodeConfig: IShortcodeConfig<IIsOpenModel> = {
       label: 'Time format',
       description: (
         <span>
-          <span>PHP date format for the start and end time of the next open period.</span>
+          <span>
+            PHP date format for the start and end time of the next open period.
+          </span>
           &nbsp;
-          <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
+          <a
+            href={'http://php.net/manual/en/function.date.php'}
+            target={'_blank'}
+          >
             More on PHP date and time formats
           </a>
         </span>

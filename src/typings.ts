@@ -43,7 +43,8 @@ interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
 /**
  * Interface for a text field
  */
-export interface ITextFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'TEXT'> {
+export interface ITextFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'TEXT'> {
   /** Definition of available string format placeholders */
   placeholders?: Array<IPlaceholder>;
 }
@@ -51,7 +52,8 @@ export interface ITextFieldConfig<M extends IShortcodeModel> extends IFieldConfi
 /**
  * Interface for a select field
  */
-export interface ISelectFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SELECT'> {
+export interface ISelectFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'SELECT'> {
   /** Available options for the select menu */
   options?: Array<IOption>;
 }
@@ -59,12 +61,14 @@ export interface ISelectFieldConfig<M extends IShortcodeModel> extends IFieldCon
 /**
  * Interface for a checkbox field
  */
-export interface ICheckboxFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'CHECKBOX'> {}
+export interface ICheckboxFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'CHECKBOX'> {}
 
 /**
  * Interface for a set id field
  */
-export interface ISetIdFieldConfig<M extends IShortcodeModel> extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> {}
+export interface ISetIdFieldConfig<M extends IShortcodeModel>
+  extends IFieldConfig<M, 'SET_ID' | 'TEXT' | 'SELECT'> {}
 
 /**
  * Union of all available implementations of `IFieldConfig`
@@ -93,7 +97,12 @@ export interface IShortcodeConfig<M extends IShortcodeModel> {
 export type TFieldType = 'TEXT' | 'SELECT' | 'CHECKBOX' | 'SET_ID';
 
 /** Union of all available shortcode types */
-export type TShortcodeType = 'op-is-open' | 'op-overview' | 'op-holidays' | 'op-irregular-openings' | 'op-schema';
+export type TShortcodeType =
+  | 'op-is-open'
+  | 'op-overview'
+  | 'op-holidays'
+  | 'op-irregular-openings'
+  | 'op-schema';
 
 /**
  * Base interface for a shortcode model. Contains the `set_id` which is
@@ -134,4 +143,6 @@ export interface IAppOptions {
 export type EmptyModel<M extends IShortcodeModel> = { [K in keyof M]: null };
 
 /** Model object having all available shortcode attributes set to a value or `null` */
-export type PartialModel<M extends IShortcodeModel> = { [K in keyof M]: M[K] | null };
+export type PartialModel<M extends IShortcodeModel> = {
+  [K in keyof M]: M[K] | null;
+};

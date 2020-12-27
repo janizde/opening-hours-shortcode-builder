@@ -50,7 +50,10 @@ const shortcodeConfig: IShortcodeConfig<IHolidaysModel> = {
         <span>
           <span>PHP date format for the date of holidays.</span>
           &nbsp;
-          <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
+          <a
+            href={'http://php.net/manual/en/function.date.php'}
+            target={'_blank'}
+          >
             More on PHP date and time formats
           </a>
         </span>

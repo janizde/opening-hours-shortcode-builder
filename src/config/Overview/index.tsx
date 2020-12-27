@@ -49,7 +49,8 @@ const shortcodeConfig: IShortcodeConfig<IOverviewModel> = {
     {
       id: 'show_description',
       label: 'Show set description',
-      description: 'Whether to show the description of the set above the opening hours',
+      description:
+        'Whether to show the description of the set above the opening hours',
       default: 'Disabled',
       type: FIELD_TYPES.CHECKBOX,
     },
@@ -84,7 +85,8 @@ const shortcodeConfig: IShortcodeConfig<IOverviewModel> = {
     {
       id: 'short',
       label: 'Use weekday abbreviations',
-      description: 'Abbreviations will be translated to you WordPress language.',
+      description:
+        'Abbreviations will be translated to you WordPress language.',
       default: 'Disabled',
       type: FIELD_TYPES.CHECKBOX,
     },
@@ -138,9 +140,14 @@ const shortcodeConfig: IShortcodeConfig<IOverviewModel> = {
       label: 'Time format',
       description: (
         <span>
-          <span>PHP date format for the start and end time of the next open period.</span>
+          <span>
+            PHP date format for the start and end time of the next open period.
+          </span>
           &nbsp;
-          <a href={'http://php.net/manual/en/function.date.php'} target={'_blank'}>
+          <a
+            href={'http://php.net/manual/en/function.date.php'}
+            target={'_blank'}
+          >
             More on PHP date and time formats
           </a>
         </span>

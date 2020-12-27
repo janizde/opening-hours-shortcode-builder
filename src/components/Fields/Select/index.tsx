@@ -5,7 +5,8 @@ import { IOption, ISelectFieldConfig } from '../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
 
-interface ISelectFieldProps extends IFieldProps<ISelectFieldConfig<any>, string> {
+interface ISelectFieldProps
+  extends IFieldProps<ISelectFieldConfig<any>, string> {
   options: Array<IOption>;
 }
 
