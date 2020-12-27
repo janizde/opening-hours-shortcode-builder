@@ -20,6 +20,9 @@ const shortcodeConfig: IShortcodeConfig<ISchemaModel> = {
       label: 'Set ID',
       description: 'ID of the set to represent in the JSON-LD record',
       type: FIELD_TYPES.SET_ID,
+      attributes: {
+        required: true,
+      },
     },
     {
       id: 'exclude_holidays',

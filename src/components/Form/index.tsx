@@ -7,7 +7,6 @@ import parseOptions from './../../optionParser';
 
 import {
   EmptyModel,
-  PartialModel,
   IShortcodeConfig,
   IShortcodeModel,
   TShortcodeType,
@@ -30,7 +29,12 @@ import SetId from './../Fields/SetId';
  * @param     config    The configuration of the shortcode for which to create the shortcode model
  * @returns             Empty model containing all available shortcode options set to `null`
  */
-const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<M>>(config: C): EmptyModel<M> =>
+const createEmptyModel = <
+  M extends IShortcodeModel,
+  C extends IShortcodeConfig<M>
+>(
+  config: C
+): EmptyModel<M> =>
   config.fields
     .map((field) => field.id)
     .reduce(
@@ -44,34 +48,18 @@ const createEmptyModel = <M extends IShortcodeModel, C extends IShortcodeConfig<
 /** The options passed in the hash portion of the url */
 const options = parseOptions();
 
-interface IFormState<M extends IShortcodeModel> {
-  /** Current shortcode tag */
-
-  shortcode: TShortcodeType;
-  /** Current partial shortcode model */
-  model: PartialModel<M>;
-}
-
 /**
  * Base component of the shortcode form holding the whole application state
  */
-export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>> extends React.PureComponent<
-  {},
-  IFormState<M>
-> {
-  constructor(props: {}) {
-    super(props);
+function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
+  const [shortcode, setShortcode] = React.useState(
+    options && options.shortcode ? options.shortcode : SHORTCODE_TYPES.OVERVIEW
+  );
+  const [model, setModel] = React.useState(
+    createEmptyModel(ShortcodeConfigs[shortcode])
+  );
 
-    const initialShortcodeId = options && options.shortcode ? options.shortcode : SHORTCODE_TYPES.OVERVIEW;
-
-    this.state = {
-      shortcode: initialShortcodeId,
-      model: createEmptyModel(ShortcodeConfigs[initialShortcodeId]),
-    };
-
-    this.handleChangeShortcodeType = this.handleChangeShortcodeType.bind(this);
-    this.handleChangeModelValue = this.handleChangeModelValue.bind(this);
-  }
+  const shortcodeConfig = ShortcodeConfigs[shortcode];
 
   /**
    * Handles changes to the currently selected shortcode tag.
@@ -80,13 +68,10 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    *
    * @param     newType     The new shortcode type
    */
-  handleChangeShortcodeType(newType: TShortcodeType) {
-    this.setState((prevState) => ({
-      ...prevState,
-      shortcode: newType,
-      model: createEmptyModel(ShortcodeConfigs[newType]),
-    }));
-  }
+  const handleChangeShortcodeType = (nextShortcode: TShortcodeType) => {
+    setShortcode(nextShortcode);
+    setModel(createEmptyModel(ShortcodeConfigs[nextShortcode]));
+  };
 
   /**
    * Handles changes to any field of the current shortcode model model
@@ -94,106 +79,116 @@ export default class Form<M extends IShortcodeModel, C extends IShortcodeConfig<
    * @param       key       Key of the shortcode attribute to change
    * @param       value     New shortcode attribute value
    */
-  handleChangeModelValue<K extends keyof M>(key: K, value: M[K]) {
-    this.setState((prevState) => ({
-      ...prevState,
-      model: Object.assign({}, prevState.model, { [key]: value }),
-    }));
-  }
+  const handleChangeModelValue = (
+    key: string | number | symbol,
+    value: TAnyModelValue
+  ) => {
+    setModel((prevModel) => ({ ...prevModel, [key]: value }));
+  };
 
-  /**
-   * Renders a form field according to its `type` and populates it with
-   * the current model value for that field
-   *
-   * @param       field     The configuration object of the field to render
-   */
-  renderField(field: TAnyFieldConfig<M>) {
-    const { model } = this.state;
-
-    type TAnyModelValue = string | number | boolean | null;
-    const currentValue = model[field.id] as TAnyModelValue;
-
-    switch (field.type) {
-      case 'TEXT':
-        const textField = field as ITextFieldConfig<M>;
-        return (
-          <Text
-            field={textField}
-            value={currentValue as string | null}
-            onChange={(value) => this.handleChangeModelValue(textField.id, value as any)}
-          />
-        );
-
-      case 'CHECKBOX':
-        const checkboxField = field as ICheckboxFieldConfig<M>;
-        return (
-          <Checkbox
-            field={checkboxField}
-            value={currentValue as boolean | null}
-            onChange={(value) => this.handleChangeModelValue(checkboxField.id, value as any)}
-          />
-        );
-
-      case 'SELECT':
-        const selectField = field as ISelectFieldConfig<M>;
-        return (
-          <Select
-            field={selectField}
-            options={selectField.options || []}
-            value={currentValue as string | null}
-            onChange={(value) => this.handleChangeModelValue(selectField.id, value as any)}
-          />
-        );
-
-      case 'SET_ID':
-        const setIdField = field as ISetIdFieldConfig<M>;
-        return (
-          <SetId
-            field={setIdField}
-            value={currentValue as string | null}
-            sets={options && options.sets}
-            onChange={(value) => this.handleChangeModelValue(setIdField.id, value as any)}
-          />
-        );
-
-      default:
-        return null;
-    }
-  }
-
-  render() {
-    const { shortcode, model } = this.state;
-    const shortcodeConfig: C = ShortcodeConfigs[shortcode] as C;
-
-    return (
-      <div className={'card mt-5 mb-5'}>
-        <div className={'card-header'}>
-          <ShortcodeSelect
-            options={Object.keys(ShortcodeConfigs)
-              .map((shortcodeKey) => ShortcodeConfigs[shortcodeKey])
-              .map((config) => ({
-                id: config.id,
-                label: config.label,
-              }))}
-            value={shortcode}
-            onChange={this.handleChangeShortcodeType}
-          />
-        </div>
-
-        <div className={'card-body'}>
-          <ShortcodeDisplay shortcode={formatShortcode(shortcodeConfig.id, model)} />
-        </div>
-
-        <ul className="list-group list-group-flush">
-          {shortcodeConfig.fields
-            .filter((field) => !field.show || field.show(model))
-            .map((field) => (
-              <li className={'list-group-item'} key={field.id}>
-                {this.renderField(field)}
-              </li>
-            ))}
-        </ul>
+  return (
+    <div className={'card mt-5 mb-5'}>
+      <div className={'card-header'}>
+        <ShortcodeSelect
+          options={Object.keys(ShortcodeConfigs)
+            .map((shortcodeKey) => ShortcodeConfigs[shortcodeKey])
+            .map((config) => ({
+              id: config.id,
+              label: config.label,
+            }))}
+          value={shortcode}
+          onChange={handleChangeShortcodeType}
+        />
       </div>
-    );
+
+      <div className={'card-body'}>
+        <ShortcodeDisplay
+          shortcode={formatShortcode(shortcodeConfig.id, model)}
+        />
+      </div>
+
+      <ul className="list-group list-group-flush">
+        {shortcodeConfig.fields
+          .filter((field) => !field.show || field.show(model))
+          .map((field) => (
+            <li className={'list-group-item'} key={field.id}>
+              <Field
+                config={field}
+                value={model[field.id]}
+                handleChangeValue={handleChangeModelValue}
+              />
+            </li>
+          ))}
+      </ul>
+    </div>
+  );
+}
+
+export default Form;
+
+type TAnyModelValue = string | number | boolean | null;
+
+interface IFieldProps<M extends IShortcodeModel> {
+  config: TAnyFieldConfig<M>;
+  value: TAnyModelValue;
+  handleChangeValue: <K extends keyof M>(key: K, value: M[K]) => void;
+}
+
+/**
+ * Renders a form field according to its `type` and populates it with
+ * the current model value for that field
+ */
+function Field<M extends IShortcodeModel>({
+  config,
+  value,
+  handleChangeValue,
+}: IFieldProps<M>) {
+  switch (config.type) {
+    case 'TEXT':
+      const textField = config as ITextFieldConfig<M>;
+      return (
+        <Text
+          field={textField}
+          value={value as string | null}
+          onChange={(nextValue) => handleChangeValue(textField.id, nextValue as any)}
+        />
+      );
+
+    case 'CHECKBOX':
+      const checkboxField = config as ICheckboxFieldConfig<M>;
+      return (
+        <Checkbox
+          field={checkboxField}
+          value={value as boolean | null}
+          onChange={(nextValue) =>
+            handleChangeValue(checkboxField.id, nextValue as any)
+          }
+        />
+      );
+
+    case 'SELECT':
+      const selectField = config as ISelectFieldConfig<M>;
+      return (
+        <Select
+          field={selectField}
+          options={selectField.options || []}
+          value={value as string | null}
+          onChange={(nextValue) => handleChangeValue(selectField.id, nextValue as any)}
+        />
+      );
+
+    case 'SET_ID':
+      const setIdField = config as ISetIdFieldConfig<M>;
+      return (
+        <SetId
+          field={setIdField}
+          value={value as string | null}
+          sets={options && options.sets}
+          onChange={(nextValue) => handleChangeValue(setIdField.id, nextValue as any)}
+        />
+      );
+
+    default:
+      return null;
   }
 }

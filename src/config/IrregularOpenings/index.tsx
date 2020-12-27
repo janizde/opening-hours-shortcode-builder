@@ -20,6 +20,9 @@ const shortcodeConfig: IShortcodeConfig<IIrregularOpeningsModel> = {
       label: 'Set ID',
       description: 'ID of the set for which this shortcode should be used',
       type: FIELD_TYPES.SET_ID,
+      attributes: {
+        required: true,
+      },
     },
     {
       id: 'title',

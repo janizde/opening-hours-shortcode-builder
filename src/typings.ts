@@ -28,7 +28,7 @@ interface IFieldConfig<M extends IShortcodeModel, T extends TFieldType> {
   id: Exclude<keyof M, symbol>;
   /** The label to show with the input */
   label: React.ReactNode;
-  /** The type if the field */
+  /** The type of the field */
   type: T;
   /** The description to show with the input */
   description?: React.ReactNode;
