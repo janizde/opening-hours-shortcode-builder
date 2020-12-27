@@ -51,15 +51,10 @@ const options = parseOptions();
 /**
  * Base component of the shortcode form holding the whole application state
  */
-function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
+const FormContainer: React.FC = () => {
   const [shortcode, setShortcode] = React.useState(
     options && options.shortcode ? options.shortcode : ShortcodeType.Overview
   );
-  const [model, setModel] = React.useState(
-    createEmptyModel(ShortcodeConfigs[shortcode])
-  );
-
-  const shortcodeConfig = ShortcodeConfigs[shortcode];
 
   /**
    * Handles changes to the currently selected shortcode tag.
@@ -70,20 +65,6 @@ function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
    */
   const handleChangeShortcodeType = (nextShortcode: ShortcodeType) => {
     setShortcode(nextShortcode);
-    setModel(createEmptyModel(ShortcodeConfigs[nextShortcode]));
-  };
-
-  /**
-   * Handles changes to any field of the current shortcode model model
-   *
-   * @param       key       Key of the shortcode attribute to change
-   * @param       value     New shortcode attribute value
-   */
-  const handleChangeModelValue = (
-    key: string | number | symbol,
-    value: TAnyModelValue
-  ) => {
-    setModel((prevModel) => ({ ...prevModel, [key]: value }));
   };
 
   return (
@@ -101,6 +82,39 @@ function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
         />
       </div>
 
+      <Form
+        shortcode={shortcode}
+        /* Explicitly setting a key to force a re-mount when the shortcode type changes */
+        key={shortcode}
+      />
+    </div>
+  );
+};
+
+export default FormContainer;
+
+const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
+  const [model, setModel] = React.useState(
+    createEmptyModel(ShortcodeConfigs[shortcode])
+  );
+
+  const shortcodeConfig = ShortcodeConfigs[shortcode];
+
+  /**
+   * Handles changes to any field of the current shortcode model model
+   *
+   * @param       key       Key of the shortcode attribute to change
+   * @param       value     New shortcode attribute value
+   */
+  const handleChangeModelValue = (
+    key: string | number | symbol,
+    value: TAnyModelValue
+  ) => {
+    setModel((prevModel) => ({ ...prevModel, [key]: value }));
+  };
+
+  return (
+    <>
       <div className={'card-body'}>
         <ShortcodeDisplay
           shortcode={formatShortcode(shortcodeConfig.id, model)}
@@ -120,11 +134,9 @@ function Form<M extends IShortcodeModel, C extends IShortcodeConfig<M>>() {
             </li>
           ))}
       </ul>
-    </div>
+    </>
   );
-}
-
-export default Form;
+};
 
 type TAnyModelValue = string | number | boolean | null;
 
