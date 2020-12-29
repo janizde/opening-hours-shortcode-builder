@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Yup from 'yup';
 
 import {
   IShortcodeModel,
@@ -27,6 +28,7 @@ const shortcodeConfig: IShortcodeConfig<ISchemaModel> = {
       attributes: {
         required: true,
       },
+      schema: Yup.string().required('You have to at least provide a Set ID'),
     },
     {
       id: 'exclude_holidays',

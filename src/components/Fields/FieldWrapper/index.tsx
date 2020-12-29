@@ -15,6 +15,7 @@ interface IFieldWrapperProps<
   F extends TAnyFieldConfig<M>
 > {
   field: F;
+  error?: string;
   children?: React.ReactNode;
 }
 
@@ -25,11 +26,13 @@ interface IFieldWrapperProps<
 function FieldWrapper<M extends IShortcodeModel, F extends TAnyFieldConfig<M>>({
   children,
   field,
+  error,
 }: IFieldWrapperProps<M, F>) {
   return (
     <Row>
       <LeftCol>
         {children}
+        {error && <div className="invalid-feedback">{error}</div>}
 
         {field.description && (
           <span className={'form-text text-muted'}>{field.description}</span>

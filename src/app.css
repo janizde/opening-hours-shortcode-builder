@@ -1,5 +1,6 @@
 .font-mono {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
 }
 
 .github-fork {
@@ -9,4 +10,8 @@
   z-index: 1000;
   width: 150px;
   height: 150px;
+}
+
+.shortcode-display-textarea[disabled] {
+  pointer-events: none;
 }

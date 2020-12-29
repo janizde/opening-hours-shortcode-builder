@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { AnySchema } from 'yup';
 
 /**
  * Represents a string format placeholder for textual shortcode
@@ -36,6 +37,8 @@ interface IFieldConfig<M extends IShortcodeModel> {
   show?: (model: PartialModel<M>) => boolean;
   /** Arbitrary HTML attributes to add to the input element */
   attributes?: {};
+  /** Validation Schema for field validation */
+  schema?: AnySchema;
 }
 
 /**

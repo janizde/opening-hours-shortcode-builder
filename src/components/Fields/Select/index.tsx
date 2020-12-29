@@ -12,6 +12,7 @@ interface ISelectFieldProps extends IFieldProps<ISelectFieldConfig<any>> {
 const SelectField: React.FC<ISelectFieldProps> = ({
   field,
   options,
+  error,
   ...restProps
 }) => (
   <FieldWrapper field={field}>
@@ -19,7 +20,7 @@ const SelectField: React.FC<ISelectFieldProps> = ({
     <select
       id={`field-${field.id}`}
       name={field.id}
-      className={'form-control'}
+      className={'form-control' && error && 'is-invalid'}
       {...restProps}
     >
       {options.map(({ value: optionValue, label }) => (

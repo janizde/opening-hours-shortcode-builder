@@ -7,7 +7,10 @@ import * as copy from 'copy-to-clipboard';
  *
  * When `window` has an opener, i.e., was opened by another page, a Close button is rendered.
  */
-const ShortcodeDisplay: React.FC<{ shortcode: string }> = ({ shortcode }) => {
+const ShortcodeDisplay: React.FC<{ shortcode: string; isValid: boolean }> = ({
+  shortcode,
+  isValid,
+}) => {
   const hasClose = !!window.opener;
 
   return (
@@ -16,16 +19,20 @@ const ShortcodeDisplay: React.FC<{ shortcode: string }> = ({ shortcode }) => {
       <textarea
         readOnly={true}
         value={shortcode}
-        className={'form-control font-mono'}
+        className={'form-control font-mono shortcode-display-textarea'}
+        disabled={!isValid}
       />
       <button
+        type="button"
         className={'btn btn-sm btn-secondary mt-2'}
         onClick={() => copy(shortcode)}
+        disabled={!isValid}
       >
         Copy to clipboard
       </button>
       {hasClose && (
         <button
+          type="button"
           className={'btn btn-sm btn-light mt-2 ml-2'}
           onClick={() => window.close()}
         >

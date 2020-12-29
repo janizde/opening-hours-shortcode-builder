@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as Yup from 'yup';
 
 import {
   IVisualShortcodeModel,
@@ -36,6 +37,9 @@ const shortcodeConfig: IShortcodeConfig<IOverviewModel> = {
       attributes: {
         required: true,
       },
+      schema: Yup.string()
+        .min(1, 'You have to at least provide a Set ID')
+        .required('You have to at least provide a Set ID'),
     },
     {
       id: 'title',

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import ShortcodeConfigs from './../../config';
 import formatShortcode from './../../formatter';
@@ -20,6 +21,7 @@ import Text from './../Fields/Text';
 import Checkbox from './../Fields/Checkbox';
 import Select from './../Fields/Select';
 import SetId from './../Fields/SetId';
+import { AnySchema } from 'yup';
 
 /**
  * Creates an empty shortcode model from the specified shortcode config
@@ -90,36 +92,61 @@ const FormContainer: React.FC = () => {
 
 export default FormContainer;
 
-const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
-  const { values, handleChange, handleBlur } = useFormik({
-    initialValues: createEmptyModel(ShortcodeConfigs[shortcode]),
-    onSubmit: () => undefined,
+const makeValidationSchema = (shortcodeConfig: IShortcodeConfig<any>) => {
+  const modelSchema: Record<string, AnySchema> = {};
+  shortcodeConfig.fields.forEach((field) => {
+    if (field.schema) {
+      modelSchema[field.id] = field.schema;
+    }
   });
 
+  return Yup.object(modelSchema);
+};
+
+const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
   const shortcodeConfig = ShortcodeConfigs[shortcode];
+  const validationSchema = makeValidationSchema(shortcodeConfig);
+
+  const {
+    values,
+    handleSubmit,
+    handleReset,
+    getFieldProps: getFormikFieldProps,
+    isValid,
+    errors,
+    touched,
+  } = useFormik({
+    initialValues: createEmptyModel(ShortcodeConfigs[shortcode]),
+    onSubmit: () => undefined,
+    validationSchema,
+    validateOnMount: true,
+  });
+
+  const getFieldProps = (fieldId: string) => ({
+    ...getFormikFieldProps(fieldId),
+    error: (touched[fieldId] && errors[fieldId]) ?? undefined,
+  });
 
   return (
     <>
       <div className={'card-body'}>
         <ShortcodeDisplay
           shortcode={formatShortcode(shortcodeConfig.id, values)}
+          isValid={isValid}
         />
       </div>
 
-      <ul className="list-group list-group-flush">
-        {shortcodeConfig.fields
-          .filter((field) => !field.show || field.show(values))
-          .map((field) => (
-            <li className={'list-group-item'} key={field.id}>
-              <Field
-                config={field}
-                value={values[field.id]}
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            </li>
-          ))}
-      </ul>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
+        <ul className="list-group list-group-flush">
+          {shortcodeConfig.fields
+            .filter((field) => !field.show || field.show(values))
+            .map((field) => (
+              <li className={'list-group-item'} key={field.id}>
+                <Field config={field} {...getFieldProps(field.id)} />
+              </li>
+            ))}
+        </ul>
+      </form>
     </>
   );
 };
@@ -127,6 +154,7 @@ const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
 interface IFieldProps<M extends IShortcodeModel> {
   config: TAnyFieldConfig<M>;
   value: string;
+  error?: string;
   onChange: React.ChangeEventHandler<HTMLElement>;
   onBlur: React.FocusEventHandler<HTMLElement>;
 }

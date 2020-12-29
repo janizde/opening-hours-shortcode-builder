@@ -7,13 +7,14 @@ import FieldWrapper from './../FieldWrapper';
 
 const TextField: React.FC<IFieldProps<ITextFieldConfig<any>>> = ({
   field,
+  error,
   ...restProps
 }) => (
-  <FieldWrapper field={field}>
+  <FieldWrapper field={field} error={error}>
     <label htmlFor={`field-${field.id}`}>{field.label}</label>
     <input
       type={'text'}
-      className={'form-control'}
+      className={`form-control ${error && 'is-invalid'}`}
       {...field.attributes}
       id={`field-${field.id}`}
       name={field.id}
