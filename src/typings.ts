@@ -158,8 +158,8 @@ export interface IAppOptions {
   sets: ISetMap;
 }
 
-/** Model object having all available shortcode attributes set to `null` */
-export type EmptyModel<M extends IShortcodeModel> = { [K in keyof M]: null };
+/** Model object having all available shortcode attributes set to an empty string */
+export type EmptyModel<M extends IShortcodeModel> = { [K in keyof M]: '' };
 
 /** Model object having all available shortcode attributes set to a value or `null` */
 export type PartialModel<M extends IShortcodeModel> = {

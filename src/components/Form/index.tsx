@@ -7,7 +7,6 @@ import formatShortcode from './../../formatter';
 import parseOptions from './../../optionParser';
 
 import {
-  EmptyModel,
   IShortcodeConfig,
   IShortcodeModel,
   ShortcodeType,
@@ -33,16 +32,25 @@ const createEmptyModel = <
   C extends IShortcodeConfig<M>
 >(
   config: C
-): EmptyModel<M> =>
-  config.fields
-    .map((field) => field.id)
-    .reduce(
-      (model, fieldId) => ({
-        ...model,
-        [fieldId]: '',
-      }),
-      {}
-    ) as EmptyModel<M>;
+): M => {
+  const model = {} as M;
+  config.fields.forEach((field) => {
+    // Special treatment for `set_id`: If a sets record is given initialize with
+    // the first one
+    if (field.id === 'set_id' && options?.sets) {
+      const keys = Object.keys(options.sets);
+
+      if (keys.length > 0) {
+        model[field.id] = keys[0];
+        return;
+      }
+    }
+
+    model[field.id] = '';
+  });
+
+  return model;
+};
 
 /** The options passed in the hash portion of the url */
 const options = parseOptions();
