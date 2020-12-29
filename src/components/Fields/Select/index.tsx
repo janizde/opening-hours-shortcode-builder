@@ -1,13 +1,17 @@
 import * as React from 'react';
+import { as } from 'class-bound-components';
 
 import { IFieldProps } from '../../typings';
 import { IOption, ISelectFieldConfig } from '../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
+import { Control } from './../../UI';
 
 interface ISelectFieldProps extends IFieldProps<ISelectFieldConfig<any>> {
   options: Array<IOption>;
 }
+
+const SelectControl = as(Control, 'select');
 
 const SelectField: React.FC<ISelectFieldProps> = ({
   field,
@@ -17,18 +21,13 @@ const SelectField: React.FC<ISelectFieldProps> = ({
 }) => (
   <FieldWrapper field={field}>
     <label htmlFor={`field-${field.id}`}>{field.label}</label>
-    <select
-      id={`field-${field.id}`}
-      name={field.id}
-      className={'form-control' && error && 'is-invalid'}
-      {...restProps}
-    >
+    <SelectControl id={`field-${field.id}`} name={field.id} {...restProps}>
       {options.map(({ value: optionValue, label }) => (
         <option key={optionValue} value={optionValue}>
           {label}
         </option>
       ))}
-    </select>
+    </SelectControl>
   </FieldWrapper>
 );
 

@@ -4,6 +4,7 @@ import { IFieldProps } from './../../typings';
 import { ITextFieldConfig } from './../../../typings';
 
 import FieldWrapper from './../FieldWrapper';
+import { Control } from './../../UI';
 
 const TextField: React.FC<IFieldProps<ITextFieldConfig<any>>> = ({
   field,
@@ -12,9 +13,9 @@ const TextField: React.FC<IFieldProps<ITextFieldConfig<any>>> = ({
 }) => (
   <FieldWrapper field={field} error={error}>
     <label htmlFor={`field-${field.id}`}>{field.label}</label>
-    <input
-      type={'text'}
-      className={`form-control ${error && 'is-invalid'}`}
+    <Control
+      type="text"
+      isInvalid={!!error}
       {...field.attributes}
       id={`field-${field.id}`}
       name={field.id}

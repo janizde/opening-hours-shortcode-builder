@@ -1,13 +1,11 @@
-import { spec, symbol, valid, explainStr } from 'js.spec';
+import * as Yup from 'yup';
 
 import { IAppOptions, shortcodeTypes } from '../typings';
 
-/** JS.spec defintition to validate `IAppOptions` at runtime */
-const appOptionsSpec = spec.map('App options', {
-  [symbol.optional]: {
-    shortcode: spec.oneOf('shortcode tag', shortcodeTypes),
-    sets: spec.map('sets', {}),
-  },
+/** Yup specification to validate `IAppOptions` at runtime */
+const appOptionsSpecification = Yup.object({
+  shortcode: Yup.string().oneOf(shortcodeTypes),
+  sets: Yup.object(),
 });
 
 /**
@@ -26,16 +24,7 @@ export default function parseOptions(): IAppOptions | null {
     const decoded = window.atob(hash);
     const options = JSON.parse(decoded);
 
-    if (!valid(appOptionsSpec, options)) {
-      console.warn(
-        `Specified app options are invalid: ${explainStr(
-          appOptionsSpec,
-          options
-        )}`
-      );
-      return null;
-    }
-
+    appOptionsSpecification.validateSync(options); // Throws when invalid
     return options;
   } catch (e) {
     // options are not properly encoded
