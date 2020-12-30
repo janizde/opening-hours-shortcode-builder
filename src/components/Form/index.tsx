@@ -141,6 +141,7 @@ const Form: React.FC<{ shortcode: ShortcodeType }> = ({ shortcode }) => {
         <ShortcodeDisplay
           shortcode={formatShortcode(shortcodeConfig.id, values)}
           isValid={isValid}
+          onValidate={() => handleSubmit()}
         />
       </div>
 

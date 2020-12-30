@@ -11,7 +11,3 @@
   width: 150px;
   height: 150px;
 }
-
-.shortcode-display-textarea[disabled] {
-  pointer-events: none;
-}
