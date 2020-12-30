@@ -1,6 +1,7 @@
 {
   "name": "op-shortcode-builder",
-  "version": "2.2.1",
+  "version": "2.3.0",
+  "license": "MIT",
   "homepage": "https://janizde.github.io/opening-hours-shortcode-builder/",
   "private": false,
   "dependencies": {
